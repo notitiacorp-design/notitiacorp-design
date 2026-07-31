@@ -3,79 +3,410 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notitia — Sites WordPress</title>
+<title>Notitia — Sites WordPress & Référencement</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #1a1a1a; }
-  .hero { background: #1a1a1a; color: white; padding: 60px 20px; text-align: center; }
-  .hero h1 { font-size: 2em; margin-bottom: 10px; }
-  .hero p { opacity: 0.7; font-size: 1.1em; }
-  .grid { max-width: 1000px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-  .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-  .card img { width: 100%; height: 200px; object-fit: cover; background: #e0e0e0; }
-  .card-body { padding: 20px; }
-  .card-body h3 { font-size: 1.2em; margin-bottom: 6px; }
-  .card-body .tags { display: flex; gap: 8px; margin: 10px 0; flex-wrap: wrap; }
-  .tag { background: #f0f0f0; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; color: #666; }
-  .card-body p { color: #555; font-size: 0.9em; line-height: 1.5; }
-  .cta { text-align: center; padding: 40px 20px 60px; }
-  .cta a { background: #1a1a1a; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-size: 1.1em; }
-  .footer { text-align: center; padding: 20px; color: #999; font-size: 0.85em; }
+  :root {
+    --paper: #080808;
+    --surface: #111110;
+    --ink: #f0ede8;
+    --ink-soft: #a09b94;
+    --ink-muted: #5c5854;
+    --accent: #d4a574;
+    --accent-dim: rgba(212, 165, 116, 0.12);
+    --rule: rgba(240, 237, 232, 0.06);
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    transition: background 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+  }
+  nav.scrolled { background: rgba(8,8,8,0.85); backdrop-filter: blur(16px); box-shadow: 0 1px 0 var(--rule); }
+  .nav-logo { font-family: Georgia, "Times New Roman", serif; font-size: 1.25rem; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--accent); }
+  .nav-cta {
+    color: var(--ink); text-decoration: none; font-size: 0.875rem;
+    padding: 8px 18px; border: 1px solid var(--ink-muted); border-radius: 6px;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .nav-cta:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out); }
+  .reveal.is-in { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.35s; }
+
+  /* Hero */
+  .hero {
+    min-height: 85vh; display: flex; align-items: center; padding: 120px 32px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-blob {
+    position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.06;
+    animation: hero-float 14s ease-in-out infinite;
+  }
+  .hero-blob-1 { width: 500px; height: 500px; background: var(--accent); top: -10%; right: -10%; }
+  .hero-blob-2 { width: 350px; height: 350px; background: #8a9a6b; bottom: 5%; left: -5%; animation-delay: -7s; }
+  @keyframes hero-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-40px, 30px) scale(1.06); }
+    66% { transform: translate(25px, -20px) scale(0.94); }
+  }
+  .hero-content { max-width: 640px; position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-family: "SF Mono", "JetBrains Mono", monospace;
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.5rem, 6vw, 3.8rem); font-weight: 400;
+    line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-lede { font-size: 1.05rem; color: var(--ink-soft); max-width: 460px; line-height: 1.7; }
+
+  /* Section */
+  section { padding: 100px 32px; }
+  .section-label {
+    font-family: "SF Mono", "JetBrains Mono", monospace;
+    font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-muted); margin-bottom: 40px;
+  }
+  .container { max-width: 1080px; margin: 0 auto; }
+
+  /* Projects */
+  .projects-grid { display: flex; flex-direction: column; gap: 80px; }
+  .project { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; }
+  .project:nth-child(even) { direction: rtl; }
+  .project:nth-child(even) .project-info { direction: ltr; }
+  .project-visual {
+    background: var(--surface); border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--rule); aspect-ratio: 16/10;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .project-visual svg { width: 100%; height: 100%; }
+  .project-num {
+    font-family: "SF Mono", "JetBrains Mono", monospace;
+    font-size: 0.7rem; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 12px;
+  }
+  .project-info h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.6rem; font-weight: 400; margin-bottom: 8px; line-height: 1.3;
+  }
+  .project-info .subtitle { color: var(--ink-muted); font-size: 0.85rem; margin-bottom: 16px; }
+  .project-info p { color: var(--ink-soft); font-size: 0.95rem; line-height: 1.7; margin-bottom: 16px; max-width: 420px; }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-size: 0.75rem; padding: 4px 12px; border-radius: 20px;
+    background: rgba(240,237,232,0.05); color: var(--ink-soft);
+    border: 1px solid rgba(240,237,232,0.08);
+  }
+
+  /* Process */
+  .process { background: var(--surface); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  .process-step { position: relative; }
+  .process-step-num {
+    font-family: "SF Mono", "JetBrains Mono", monospace;
+    font-size: 0.65rem; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 12px;
+  }
+  .process-step h4 { font-family: Georgia, "Times New Roman", serif; font-size: 1.15rem; font-weight: 400; margin-bottom: 8px; }
+  .process-step p { color: var(--ink-soft); font-size: 0.9rem; line-height: 1.6; }
+
+  /* Pricing */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .price-card {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 12px;
+    padding: 32px; transition: border-color 0.3s;
+  }
+  .price-card:hover { border-color: rgba(212,165,116,0.25); }
+  .price-card h4 { font-family: Georgia, "Times New Roman", serif; font-size: 1.1rem; font-weight: 400; margin-bottom: 4px; }
+  .price-amount { font-size: 2rem; font-weight: 300; color: var(--accent); margin: 16px 0 4px; }
+  .price-note { font-size: 0.8rem; color: var(--ink-muted); margin-bottom: 16px; }
+  .price-card ul { list-style: none; }
+  .price-card li {
+    font-size: 0.88rem; color: var(--ink-soft); padding: 6px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .price-card li:last-child { border: none; }
+
+  /* Contact */
+  .contact { text-align: center; }
+  .contact h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2rem; font-weight: 400; margin-bottom: 12px;
+  }
+  .contact p { color: var(--ink-soft); margin-bottom: 32px; font-size: 1.05rem; }
+  .contact-btn {
+    display: inline-block; background: var(--accent); color: #080808;
+    padding: 14px 36px; border-radius: 8px; text-decoration: none;
+    font-weight: 600; font-size: 1rem; transition: opacity 0.3s;
+  }
+  .contact-btn:hover { opacity: 0.85; }
+
+  /* Footer */
+  footer {
+    text-align: center; padding: 32px; border-top: 1px solid var(--rule);
+    font-size: 0.8rem; color: var(--ink-muted);
+  }
+
+  @media (max-width: 768px) {
+    .project { grid-template-columns: 1fr; gap: 24px; }
+    .project:nth-child(even) { direction: ltr; }
+    .process-grid { grid-template-columns: 1fr; gap: 32px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    section { padding: 64px 20px; }
+    .hero { padding: 100px 20px 64px; min-height: auto; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .hero-blob { animation: none; }
+  }
 </style>
 </head>
 <body>
-<div class="hero">
-  <h1>Notitia — Création de sites WordPress</h1>
-  <p>Sites vitrines, fiches Google Business, référencement</p>
-</div>
 
-<div class="grid">
-  <div class="card">
-    <img src="https://placehold.co/600x400/2d2d2d/ffffff?text=Site+Vitrine+Artisan" alt="Site vitrine artisan">
-    <div class="card-body">
-      <h3>Site vitrine — Artisan du bâtiment</h3>
-      <div class="tags">
-        <span class="tag">WordPress</span>
-        <span class="tag">SEO local</span>
-        <span class="tag">Formulaire contact</span>
+<nav id="nav">
+  <div class="nav-logo">Noti<span>tia</span></div>
+  <a href="#contact" class="nav-cta">Contact</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-content reveal">
+    <div class="hero-eyebrow">Sites WordPress & Référencement</div>
+    <h1>Votre site vitrine,<br><em>sans superflu.</em></h1>
+    <p class="hero-lede">WordPress sur mesure, fiche Google Business, référencement local. Un site qui travaille pendant que vous dormez.</p>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-label reveal">Projets récents</div>
+
+    <div class="projects-grid">
+
+      <div class="project reveal reveal-delay-1">
+        <div class="project-visual">
+          <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="#111110"/>
+            <rect x="20" y="16" width="360" height="20" rx="3" fill="rgba(255,255,255,0.04)"/>
+            <rect x="20" y="44" width="360" height="1" fill="rgba(255,255,255,0.06)"/>
+            <rect x="20" y="60" width="220" height="120" rx="4" fill="rgba(212,165,116,0.08)"/>
+            <rect x="28" y="72" width="140" height="5" rx="2" fill="rgba(255,255,255,0.12)"/>
+            <rect x="28" y="84" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+            <rect x="28" y="95" width="160" height="3" rx="1.5" fill="rgba(255,255,255,0.06)"/>
+            <rect x="28" y="105" width="80" height="3" rx="1.5" fill="rgba(255,255,255,0.04)"/>
+            <rect x="28" y="130" width="90" height="28" rx="6" fill="rgba(212,165,116,0.2)"/>
+            <rect x="28" y="165" width="120" height="3" rx="1.5" fill="rgba(255,255,255,0.04)"/>
+            <rect x="260" y="60" width="120" height="80" rx="4" fill="rgba(255,255,255,0.025)"/>
+            <circle cx="320" cy="92" r="18" fill="none" stroke="rgba(212,165,116,0.15)" stroke-width="0.8"/>
+            <rect x="272" y="120" width="96" height="4" rx="2" fill="rgba(255,255,255,0.06)"/>
+            <rect x="275" y="128" width="70" height="3" rx="1.5" fill="rgba(255,255,255,0.03)"/>
+            <rect x="20" y="195" width="360" height="30" rx="4" fill="rgba(255,255,255,0.02)"/>
+            <rect x="30" y="204" width="60" height="12" rx="2" fill="rgba(212,165,116,0.1)"/>
+            <rect x="100" y="204" width="80" height="12" rx="2" fill="rgba(255,255,255,0.03)"/>
+            <rect x="190" y="204" width="60" height="12" rx="2" fill="rgba(255,255,255,0.03)"/>
+          </svg>
+        </div>
+        <div class="project-info">
+          <div class="project-num">01</div>
+          <h3>Site vitrine artisan</h3>
+          <div class="subtitle">WordPress · SEO local · Formulaire contact</div>
+          <p>Site complet avec présentation des prestations, galerie de réalisations, intégration fiche Google Business et référencement local optimisé pour capter les recherches de proximité.</p>
+          <div class="tags">
+            <span class="tag">WordPress</span>
+            <span class="tag">SEO local</span>
+            <span class="tag">Google Business</span>
+          </div>
+        </div>
       </div>
-      <p>Site vitrine complet avec présentation des services, galerie de réalisations, fiche Google Business intégrée et référencement local optimisé.</p>
+
+      <div class="project reveal reveal-delay-2">
+        <div class="project-visual">
+          <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="#111110"/>
+            <rect x="20" y="20" width="360" height="200" rx="8" fill="none" stroke="rgba(255,255,255,0.04)"/>
+            <rect x="220" y="36" width="140" height="164" rx="6" fill="rgba(212,165,116,0.06)"/>
+            <rect x="220" y="36" width="140" height="40" rx="6" fill="rgba(212,165,116,0.12)"/>
+            <rect x="235" y="50" width="70" height="6" rx="3" fill="rgba(255,255,255,0.15)"/>
+            <rect x="235" y="62" width="100" height="4" rx="2" fill="rgba(255,255,255,0.06)"/>
+            <rect x="235" y="88" width="110" height="5" rx="2.5" fill="rgba(255,255,255,0.08)"/>
+            <rect x="235" y="100" width="100" height="4" rx="2" fill="rgba(255,255,255,0.04)"/>
+            <rect x="235" y="112" width="80" height="4" rx="2" fill="rgba(255,255,255,0.04)"/>
+            <rect x="235" y="136" width="110" height="30" rx="8" fill="rgba(212,165,116,0.18)"/>
+            <rect x="40" y="50" width="160" height="3" rx="1.5" fill="rgba(255,255,255,0.04)"/>
+            <rect x="40" y="60" width="120" height="3" rx="1.5" fill="rgba(255,255,255,0.03)"/>
+            <rect x="40" y="80" width="160" height="100" rx="6" fill="rgba(255,255,255,0.025)"/>
+            <rect x="55" y="95" width="80" height="4" rx="2" fill="rgba(255,255,255,0.06)"/>
+            <rect x="55" y="105" width="130" height="3" rx="1.5" fill="rgba(255,255,255,0.03)"/>
+            <rect x="55" y="113" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.03)"/>
+            <rect x="55" y="123" width="60" height="3" rx="1.5" fill="rgba(255,255,255,0.02)"/>
+          </svg>
+        </div>
+        <div class="project-info">
+          <div class="project-num">02</div>
+          <h3>Landing page coach</h3>
+          <div class="subtitle">WordPress · Réservation · Instagram</div>
+          <p>Page d'atterrissage avec présentation des accompagnements, système de prise de rendez-vous en ligne, intégration du flux Instagram et formulaire de contact optimisé.</p>
+          <div class="tags">
+            <span class="tag">WordPress</span>
+            <span class="tag">Réservation</span>
+            <span class="tag">Instagram</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project reveal reveal-delay-3">
+        <div class="project-visual">
+          <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="240" fill="#111110"/>
+            <rect x="20" y="16" width="360" height="16" rx="3" fill="rgba(255,255,255,0.03)"/>
+            <rect x="20" y="44" width="180" height="160" rx="6" fill="rgba(212,165,116,0.06)"/>
+            <rect x="36" y="60" width="148" height="80" rx="4" fill="rgba(255,255,255,0.025)"/>
+            <rect x="36" y="152" width="100" height="4" rx="2" fill="rgba(255,255,255,0.08)"/>
+            <rect x="36" y="162" width="70" height="3" rx="1.5" fill="rgba(255,255,255,0.04)"/>
+            <rect x="36" y="175" width="60" height="20" rx="5" fill="rgba(212,165,116,0.15)"/>
+            <rect x="220" y="44" width="160" height="78" rx="6" fill="rgba(255,255,255,0.02)"/>
+            <rect x="236" y="58" width="80" height="4" rx="2" fill="rgba(255,255,255,0.06)"/>
+            <rect x="236" y="68" width="128" height="3" rx="1.5" fill="rgba(255,255,255,0.03)"/>
+            <rect x="236" y="78" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.03)"/>
+            <rect x="220" y="132" width="160" height="72" rx="6" fill="rgba(255,255,255,0.02)"/>
+            <rect x="236" y="146" width="80" height="4" rx="2" fill="rgba(255,255,255,0.06)"/>
+            <rect x="236" y="156" width="128" height="3" rx="1.5" fill="rgba(255,255,255,0.03)"/>
+            <rect x="236" y="166" width="100" height="3" rx="1.5" fill="rgba(255,255,255,0.03)"/>
+          </svg>
+        </div>
+        <div class="project-info">
+          <div class="project-num">03</div>
+          <h3>Site vitrine commerçant</h3>
+          <div class="subtitle">WordPress · Avis Google · Mobile-first</div>
+          <p>Site responsive avec intégration des avis Google, mise en avant des produits phares, page contact avec plan interactif et optimisation mobile pour une navigation fluide sur tous les écrans.</p>
+          <div class="tags">
+            <span class="tag">WordPress</span>
+            <span class="tag">Avis Google</span>
+            <span class="tag">Responsive</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
+</section>
 
-  <div class="card">
-    <img src="https://placehold.co/600x400/2d2d2d/ffffff?text=Site+Vitrine+Coach" alt="Site vitrine coach">
-    <div class="card-body">
-      <h3>Landing page — Coach bien-être</h3>
-      <div class="tags">
-        <span class="tag">WordPress</span>
-        <span class="tag">Réservation</span>
-        <span class="tag">Instagram</span>
+<section class="process">
+  <div class="container">
+    <div class="section-label reveal">Comment ça marche</div>
+    <div class="process-grid">
+      <div class="process-step reveal reveal-delay-1">
+        <div class="process-step-num">01</div>
+        <h4>On en parle</h4>
+        <p>Vous me dites ce que vous voulez afficher, je vous fais un devis dans la foulée.</p>
       </div>
-      <p>Page d'atterrissage avec présentation, système de prise de rendez-vous, intégration Instagram et formulaire de contact.</p>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="process-step-num">02</div>
+        <h4>Vous fournissez</h4>
+        <p>Textes, photos, logo. Le contenu vient de vous, la technique de mon côté.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="process-step-num">03</div>
+        <h4>Je livre</h4>
+        <p>Site en ligne sous une semaine. Vous validez, vous payez. Simple.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <div class="card">
-    <img src="https://placehold.co/600x400/2d2d2d/ffffff?text=Site+Vitrine+Commercant" alt="Site vitrine commerçant">
-    <div class="card-body">
-      <h3>Site vitrine — Commerçant de proximité</h3>
-      <div class="tags">
-        <span class="tag">WordPress</span>
-        <span class="tag">Avis Google</span>
-        <span class="tag">Mobile-first</span>
+<section id="pricing">
+  <div class="container">
+    <div class="section-label reveal">Tarifs</div>
+    <div class="pricing-grid">
+      <div class="price-card reveal reveal-delay-1">
+        <h4>Site vitrine</h4>
+        <div class="price-amount">280€</div>
+        <div class="price-note">WordPress standard</div>
+        <ul>
+          <li>Jusqu'à 5 pages</li>
+          <li>Formulaire de contact</li>
+          <li>Design responsive</li>
+          <li>Livraison 1 semaine</li>
+        </ul>
       </div>
-      <p>Site responsive avec intégration des avis Google, mise en avant des produits phares et optimisation mobile.</p>
+      <div class="price-card reveal reveal-delay-2">
+        <h4>Site + Référencement</h4>
+        <div class="price-amount">400€</div>
+        <div class="price-note">Visibilité locale</div>
+        <ul>
+          <li>Site vitrine complet</li>
+          <li>Fiche Google Business</li>
+          <li>Référencement local</li>
+          <li>Avis Google intégrés</li>
+        </ul>
+      </div>
+      <div class="price-card reveal reveal-delay-3">
+        <h4>Site + Prospection</h4>
+        <div class="price-amount">500€</div>
+        <div class="price-note">Pack complet</div>
+        <ul>
+          <li>Site + Référencement</li>
+          <li>Page Instagram pro</li>
+          <li>Prospection ciblée</li>
+          <li>Suivi 1 mois</li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<div class="cta">
-  <a href="https://www.allovoisins.com/user/Notitia" target="_blank">Un projet ? Parlons-en sur AlloVoisins</a>
-</div>
+<section id="contact" class="contact">
+  <div class="container">
+    <h2 class="reveal">Un projet ?</h2>
+    <p class="reveal reveal-delay-1">Parlons-en sur AlloVoisins. Décrivez votre besoin, je vous réponds dans la journée.</p>
+    <a href="https://www.allovoisins.com/user/Notitia" target="_blank" class="contact-btn reveal reveal-delay-2">Me contacter sur AlloVoisins</a>
+  </div>
+</section>
 
-<div class="footer">
-  Notitia — Sites WordPress, référencement & outils Google Business
-</div>
+<footer>
+  <div class="container">Notitia — Sites WordPress, référencement & outils Google Business</div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
