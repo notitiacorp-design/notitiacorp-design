@@ -42,7 +42,7 @@ main,header,footer{position:relative;z-index:1}
 
 /* --- Header --- */
 header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--rule)}
-.tete{display:flex;align-items:center;justify-content:space-between;gap:var(--md);padding:1rem 0}
+.tete{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:1rem 0}
 .identite{min-width:0}
 .identite .nom{font-family:var(--serif);font-size:1.25rem;font-weight:600;letter-spacing:.01em;white-space:nowrap}
 .identite{text-align:center}
@@ -76,7 +76,7 @@ nav a:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-rad
 
 /* --- Hero --- */
 .hero{padding:clamp(3rem,7vw,6rem) 0 clamp(1.5rem,3vw,2.5rem)}
-.hero-grid{display:grid;gap:var(--xxxl)}
+.hero-grid{display:grid;gap:64px}
 .hero .etiquette{margin-bottom:1.2rem}
 .hero h1{max-width:13ch}
 .hero .accroche{margin-top:1.4rem;max-width:44ch;font-size:1.1rem;color:var(--ink-soft);font-weight:300}
@@ -86,7 +86,7 @@ nav a:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-rad
 .portrait-cadre{background:var(--beige);border-radius:10px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .portrait-cadre img{width:100%;height:100%;object-fit:cover}
 .bio-portrait{margin-top:1.2rem;font-size:.92rem;color:var(--ink-soft);max-width:42ch;line-height:1.8;border-left:2px solid var(--green);padding-left:1.2rem;font-style:italic}
-@media(min-width:900px){.hero-grid{grid-template-columns:1.05fr .85fr;align-items:center;gap:var(--huge)}}
+@media(min-width:900px){.hero-grid{grid-template-columns:1.05fr .85fr;align-items:center;gap:96px}}
 
 /* --- Bande activites (compact) --- */
 .bande-activites{padding:1.4rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--green-soft)}
@@ -105,7 +105,7 @@ section{padding:clamp(2.5rem,5vw,4rem) 0}
 
 /* --- Accompagnements --- */
 #accompagnements{padding-top:clamp(1.5rem,3vw,2.5rem)}
-.accompagnement{display:grid;gap:var(--xxxl);padding:clamp(2rem,4vw,3rem) 0;border-top:1px solid var(--rule)}
+.accompagnement{display:grid;gap:64px;padding:clamp(2rem,4vw,3rem) 0;border-top:1px solid var(--rule)}
 .accompagnement:first-of-type{border-top:none;padding-top:0}
 .accompagnement .num{font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--green);letter-spacing:.06em}
 .accompagnement .texte p{max-width:60ch}
@@ -118,7 +118,7 @@ section{padding:clamp(2.5rem,5vw,4rem) 0}
 .status-badge{display:inline-block;margin-top:1.2rem;padding:.35rem .8rem;border:1px solid var(--rule);border-radius:999px;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
 .citation-calin{margin-top:1.4rem;padding:.6rem 0;font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--green);font-style:italic;line-height:1.5;border-left:none}
 @media(min-width:900px){
-  .accompagnement{grid-template-columns:.9fr 1.1fr;align-items:start;gap:var(--huge)}
+  .accompagnement{grid-template-columns:.9fr 1.1fr;align-items:start;gap:96px}
   .accompagnement.inverse{grid-template-columns:1.1fr .9fr}
   .accompagnement.inverse .visuel{order:2}
 }
@@ -131,7 +131,7 @@ section{padding:clamp(2.5rem,5vw,4rem) 0}
 
 /* --- Contact --- */
 .contact{background:var(--cream-warm);border-radius:1.2rem;padding:clamp(2rem,5vw,3.5rem)}
-.contact-grid{display:grid;gap:var(--xxxl)}
+.contact-grid{display:grid;gap:64px}
 @media(min-width:900px){.contact-grid{grid-template-columns:1fr 1fr}}
 form{display:grid;gap:1.1rem}
 label{display:grid;gap:.35rem;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);font-weight:500}
@@ -151,8 +151,8 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
 .pied{display:grid;gap:.4rem}
 
 /* --- Reveal (subtle) --- */
-.reveal{opacity:0;transform:translateY(12px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
-.revealed{opacity:1;transform:translateY(0)}
+.reveal{opacity:1;transform:none}
+.revealed{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   .reveal{transition:none}
   .bouton{transition:none}
@@ -349,14 +349,7 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
   </div>
 </footer>
 
-<script>
-// --- Subtle reveal on scroll ---
-(function(){
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('revealed');obs.unobserve(x.target)}})},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-})();
-</script>
+
 
 </body>
 </html>
