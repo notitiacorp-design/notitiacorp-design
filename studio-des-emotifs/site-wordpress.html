@@ -9,69 +9,53 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --cream:#faf8f4;
-  --cream-warm:#f3ede4;
-  --beige:#efe9e0;
-  --sand:#e8e0d4;
-  --green:#3d4e38;
-  --green-soft:#dde4d9;
-  --green-deep:#2d3a2a;
-  --ink:#23201b;
-  --ink-soft:#4a443a;
-  --ink-faint:#8a8276;
-  --rule:rgba(35,32,27,.12);
-  --serif:'Cormorant Garamond', Georgia, serif;
-  --sans:'Jost','Helvetica Neue',sans-serif;
-  --xs:4px;--sm:8px;--md:16px;--lg:24px;--xl:32px;--xxl:48px;--xxxl:64px;--huge:96px;
-}
 *,::before,::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:1.05rem;line-height:1.75;-webkit-font-smoothing:antialiased}
+body{background:#faf8f4;color:#23201b;font-family:'Jost','Helvetica Neue',sans-serif;font-weight:300;font-size:1.05rem;line-height:1.75;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 
 .wrap{width:min(1120px,calc(100% - 2.5rem));margin-inline:auto}
-.etiquette{font-family:var(--sans);font-weight:500;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green)}
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.1;color:var(--ink)}
+.etiquette{font-family:'Jost','Helvetica Neue',sans-serif;font-weight:500;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#3d4e38}
+h1,h2,h3{font-family:'Cormorant Garamond', Georgia, serif;font-weight:600;line-height:1.1;color:#23201b}
 h1{font-size:clamp(2.6rem,6vw,4.8rem)}
 h2{font-size:clamp(1.8rem,3.4vw,2.8rem)}
-h3{font-size:clamp(1.35rem,2vw,1.7rem);color:var(--green)}
+h3{font-size:clamp(1.35rem,2vw,1.7rem);color:#3d4e38}
 main,header,footer{position:relative;z-index:1}
 
 /* --- Header --- */
-header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1px solid var(--rule)}
+header{position:sticky;top:0;z-index:50;background:#faf8f4;border-bottom:1px solid rgba(35,32,27,.12)}
 .tete{display:flex;align-items:center;justify-content:space-between;gap:var(--md);padding:1rem 0}
 .identite{min-width:0}
-.identite .nom{font-family:var(--serif);font-size:1.25rem;font-weight:600;letter-spacing:.01em;white-space:nowrap}
+.identite .nom{font-family:'Cormorant Garamond', Georgia, serif;font-size:1.25rem;font-weight:600;letter-spacing:.01em;white-space:nowrap}
 .identite{text-align:center}
-.identite .lieu{font-size:.78rem;letter-spacing:.06em;color:var(--ink-soft);font-weight:400;margin-top:2px}
-nav{display:flex;gap:var(--xs)}
-nav a{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:400;padding:.5rem .6rem;position:relative;color:var(--ink-soft);transition:color .3s}
-nav a::after{content:'';position:absolute;left:.6rem;right:.6rem;bottom:.3rem;height:1px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.22,1,.36,1)}
-nav a:hover,nav a:focus-visible{color:var(--ink)}
-nav a:hover::after,nav a:focus-visible::after{transform:scaleX(1)}
-nav a:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-radius:2px}
+.identite .lieu{font-size:.78rem;letter-spacing:.06em;color:#4a443a;font-weight:400;margin-top:2px}
+.nav-menu,nav{display:flex;gap:4px;--sm:8px;--md:16px;--lg:24px;--xl:32px;--xxl:48px;--xxxl:64px;--huge:96px}
+.nav-menu a,nav a{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:400;padding:.5rem .6rem;position:relative;color:#4a443a;transition:color .3s}
+.nav-menu a::after,nav a::after{content:'';position:absolute;left:.6rem;right:.6rem;bottom:.3rem;height:1px;background:#3d4e38;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.nav-menu a:hover,.nav-menu a:focus-visible,nav a:hover,nav a:focus-visible{color:#23201b}
+.nav-menu a:hover::after,.nav-menu a:focus-visible::after,nav a:hover::after,nav a:focus-visible::after{transform:scaleX(1)}
+.nav-menu a:focus-visible,nav a:focus-visible{outline:2px solid #3d4e38;outline-offset:4px;border-radius:2px}
 @media(max-width:768px){
   .tete{flex-direction:column;align-items:center;gap:.5rem;padding:.75rem 0}
   .identite .nom{font-size:1.1rem}
-  nav{flex-wrap:wrap;justify-content:center}
-  nav a{padding:.45rem .55rem;font-size:.7rem}
+  .nav-menu,nav{flex-wrap:wrap;justify-content:center}
+  .nav-menu a,nav a{padding:.45rem .55rem;font-size:.7rem}
 }
 
 /* --- Buttons --- */
-.bouton{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.7rem;border-radius:999px;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:400;transition:background .35s,color .35s,border-color .35s,transform .35s;cursor:pointer;border:none;font-family:var(--sans)}
-.bouton.plein{background:var(--green);color:var(--cream)}
-.bouton.plein:hover{background:var(--green-deep);transform:translateY(-1px)}
-.bouton.plein:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.bouton{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.7rem;border-radius:999px;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:400;transition:background .35s,color .35s,border-color .35s,transform .35s;cursor:pointer;border:none;font-family:'Jost','Helvetica Neue',sans-serif}
+.bouton.plein{background:#3d4e38;color:#faf8f4}
+.bouton.plein:hover{background:#2d3a2a;transform:translateY(-1px)}
+.bouton.plein:focus-visible{outline:2px solid #3d4e38;outline-offset:3px}
 .bouton.plein:active{transform:translateY(0)}
-.bouton.contour{border:1px solid var(--rule);color:var(--ink);background:transparent}
-.bouton.contour:hover{border-color:var(--green);color:var(--green);transform:translateY(-1px)}
-.bouton.contour:focus-visible{outline:2px solid var(--green);outline-offset:3px}
-.bouton.insta{border:1px solid var(--rule);color:var(--ink-soft);padding:.75rem 1.3rem;gap:.4rem;font-size:.72rem;background:transparent}
-.bouton.insta:hover{border-color:var(--ink-soft);color:var(--ink);transform:translateY(-1px)}
-.bouton.insta:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.bouton.contour{border:1px solid rgba(35,32,27,.12);color:#23201b;background:transparent}
+.bouton.contour:hover{border-color:#3d4e38;color:#3d4e38;transform:translateY(-1px)}
+.bouton.contour:focus-visible{outline:2px solid #3d4e38;outline-offset:3px}
+.bouton.insta{border:1px solid rgba(35,32,27,.12);color:#4a443a;padding:.75rem 1.3rem;gap:.4rem;font-size:.72rem;background:transparent}
+.bouton.insta:hover{border-color:#4a443a;color:#23201b;transform:translateY(-1px)}
+.bouton.insta:focus-visible{outline:2px solid #3d4e38;outline-offset:3px}
 .bouton.insta svg{width:16px;height:16px;flex-shrink:0}
 
 /* --- Hero --- */
@@ -79,44 +63,44 @@ nav a:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-rad
 .hero-grid{display:grid;gap:var(--xxxl)}
 .hero .etiquette{margin-bottom:1.2rem}
 .hero h1{max-width:13ch}
-.hero .accroche{margin-top:1.4rem;max-width:44ch;font-size:1.1rem;color:var(--ink-soft);font-weight:300}
-.hero .activites-ligne{margin-top:1rem;font-family:var(--serif);font-size:1.05rem;color:var(--green);font-weight:500;letter-spacing:.02em}
-.hero .activites-ligne span{color:var(--ink-faint);margin:0 .5rem}
+.hero .accroche{margin-top:1.4rem;max-width:44ch;font-size:1.1rem;color:#4a443a;font-weight:300}
+.hero .activites-ligne{margin-top:1rem;font-family:'Cormorant Garamond', Georgia, serif;font-size:1.05rem;color:#3d4e38;font-weight:500;letter-spacing:.02em}
+.hero .activites-ligne span{color:#8a8276;margin:0 .5rem}
 .hero .actions{margin-top:2.2rem;display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
-.portrait-cadre{background:var(--beige);border-radius:10px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.portrait-cadre{background:#efe9e0;border-radius:10px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .portrait-cadre img{width:100%;height:100%;object-fit:cover}
-.bio-portrait{margin-top:1.2rem;font-size:.92rem;color:var(--ink-soft);max-width:42ch;line-height:1.8;border-left:2px solid var(--green);padding-left:1.2rem;font-style:italic}
+.bio-portrait{margin-top:1.2rem;font-size:.92rem;color:#4a443a;max-width:42ch;line-height:1.8;border-left:2px solid #3d4e38;padding-left:1.2rem;font-style:italic}
 @media(min-width:900px){.hero-grid{grid-template-columns:1.05fr .85fr;align-items:center;gap:var(--huge)}}
 
 /* --- Bande activites (compact) --- */
-.bande-activites{padding:1.4rem 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--green-soft)}
+.bande-activites{padding:1.4rem 0;border-top:1px solid rgba(35,32,27,.12);border-bottom:1px solid rgba(35,32,27,.12);background:#dde4d9}
 .bande-inner{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
-.bande-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:500;white-space:nowrap}
+.bande-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#3d4e38;font-weight:500;white-space:nowrap}
 .bande-items{display:flex;flex-wrap:wrap;gap:.5rem 2rem;list-style:none}
-.bande-items a{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--ink);border-bottom:1px solid transparent;transition:border-color .35s,color .35s;padding-bottom:1px}
-.bande-items a:hover,.bande-items a:focus-visible{color:var(--green);border-color:var(--green)}
-.bande-items a:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-radius:2px}
+.bande-items a{font-family:'Cormorant Garamond', Georgia, serif;font-size:1rem;font-weight:500;color:#23201b;border-bottom:1px solid transparent;transition:border-color .35s,color .35s;padding-bottom:1px}
+.bande-items a:hover,.bande-items a:focus-visible{color:#3d4e38;border-color:#3d4e38}
+.bande-items a:focus-visible{outline:2px solid #3d4e38;outline-offset:4px;border-radius:2px}
 
 /* --- Sections --- */
 section{padding:clamp(2.5rem,5vw,4rem) 0}
 .tete-section{max-width:56ch;margin-bottom:2rem}
 .tete-section .etiquette{margin-bottom:.8rem}
-.tete-section p{margin-top:1rem;color:var(--ink-soft);max-width:48ch}
+.tete-section p{margin-top:1rem;color:#4a443a;max-width:48ch}
 
 /* --- Accompagnements --- */
 #accompagnements{padding-top:clamp(1.5rem,3vw,2.5rem)}
-.accompagnement{display:grid;gap:var(--xxxl);padding:clamp(2rem,4vw,3rem) 0;border-top:1px solid var(--rule)}
+.accompagnement{display:grid;gap:var(--xxxl);padding:clamp(2rem,4vw,3rem) 0;border-top:1px solid rgba(35,32,27,.12)}
 .accompagnement:first-of-type{border-top:none;padding-top:0}
-.accompagnement .num{font-family:var(--serif);font-size:.95rem;font-style:italic;color:var(--green);letter-spacing:.06em}
+.accompagnement .num{font-family:'Cormorant Garamond', Georgia, serif;font-size:.95rem;font-style:italic;color:#3d4e38;letter-spacing:.06em}
 .accompagnement .texte p{max-width:60ch}
 .accompagnement .texte>p+p{margin-top:1.2rem}
-.accompagnement .details{margin-top:1.6rem;display:grid;gap:.9rem;border-left:1px solid var(--green);padding-left:1.3rem;background:var(--green-soft);padding:1.2rem 1.3rem;border-radius:0 8px 8px 0;border-left:3px solid var(--green)}
-.accompagnement .details div{font-size:.92rem;color:var(--ink)}
-.accompagnement .details strong{display:block;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:.2rem}
-.accompagnement .visuel{border-radius:12px;overflow:hidden;background:var(--beige)}
+.accompagnement .details{margin-top:1.6rem;display:grid;gap:.9rem;border-left:1px solid #3d4e38;padding-left:1.3rem;background:#dde4d9;padding:1.2rem 1.3rem;border-radius:0 8px 8px 0;border-left:3px solid #3d4e38}
+.accompagnement .details div{font-size:.92rem;color:#23201b}
+.accompagnement .details strong{display:block;font-weight:600;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#3d4e38;margin-bottom:.2rem}
+.accompagnement .visuel{border-radius:12px;overflow:hidden;background:#efe9e0}
 .accompagnement .visuel img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
-.status-badge{display:inline-block;margin-top:1.2rem;padding:.35rem .8rem;border:1px solid var(--rule);border-radius:999px;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
-.citation-calin{margin-top:1.4rem;padding:.6rem 0;font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--green);font-style:italic;line-height:1.5;border-left:none}
+.status-badge{display:inline-block;margin-top:1.2rem;padding:.35rem .8rem;border:1px solid rgba(35,32,27,.12);border-radius:999px;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:#8a8276}
+.citation-calin{margin-top:1.4rem;padding:.6rem 0;font-family:'Cormorant Garamond', Georgia, serif;font-size:1.1rem;font-weight:600;color:#3d4e38;font-style:italic;line-height:1.5;border-left:none}
 @media(min-width:900px){
   .accompagnement{grid-template-columns:.9fr 1.1fr;align-items:start;gap:var(--huge)}
   .accompagnement.inverse{grid-template-columns:1.1fr .9fr}
@@ -124,30 +108,31 @@ section{padding:clamp(2.5rem,5vw,4rem) 0}
 }
 
 /* --- Cabinet / Salle d'attente --- */
-.cabinet-visuel{padding:clamp(2rem,4vw,3.5rem) 0;border-top:1px solid var(--rule)}
-.cabinet-visuel figure{border-radius:12px;overflow:hidden;background:var(--cream-warm);max-height:65vh}
+.cabinet-visuel{padding:clamp(2rem,4vw,3.5rem) 0;border-top:1px solid rgba(35,32,27,.12)}
+.cabinet-visuel figure{border-radius:12px;overflow:hidden;background:#f3ede4;max-height:65vh}
 .cabinet-visuel img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;max-height:65vh}
-.cabinet-visuel figcaption{margin-top:.8rem;font-size:.82rem;color:var(--ink-faint);text-align:center;font-style:italic}
+.cabinet-visuel figcaption{margin-top:.8rem;font-size:.82rem;color:#8a8276;text-align:center;font-style:italic}
 
 /* --- Contact --- */
-.contact{background:var(--cream-warm);border-radius:1.2rem;padding:clamp(2rem,5vw,3.5rem)}
+.contact{background:#f3ede4;border-radius:1.2rem;padding:clamp(2rem,5vw,3.5rem)}
 .contact-grid{display:grid;gap:var(--xxxl)}
+.contact-actions{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:2rem}
 @media(min-width:900px){.contact-grid{grid-template-columns:1fr 1fr}}
 form{display:grid;gap:1.1rem}
-label{display:grid;gap:.35rem;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);font-weight:500}
-input,textarea,select{width:100%;background:var(--cream);border:1px solid var(--rule);border-radius:.6rem;padding:.85rem 1rem;font:inherit;font-size:.98rem;color:var(--ink);transition:border-color .4s}
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--green)}
-input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-color:var(--green)}
+label{display:grid;gap:.35rem;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:#23201b;font-weight:500}
+input,textarea,select{width:100%;background:#faf8f4;border:1px solid rgba(35,32,27,.12);border-radius:.6rem;padding:.85rem 1rem;font:inherit;font-size:.98rem;color:#23201b;transition:border-color .4s}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#3d4e38}
+input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #3d4e38;outline-offset:2px;border-color:#3d4e38}
 textarea{min-height:150px;resize:vertical}
 select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%234a443a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer}
-.infos-contact p+p{margin-top:1.2rem;color:var(--ink)}
-.infos-contact strong{display:block;font-weight:500;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.2rem}
+.infos-contact p+p{margin-top:1.2rem;color:#23201b}
+.infos-contact strong{display:block;font-weight:500;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#3d4e38;margin-bottom:.2rem}
 .infos-contact a{transition:color .3s}
-.infos-contact a:hover,.infos-contact a:focus-visible{color:var(--green)}
-.infos-contact .paiement{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
+.infos-contact a:hover,.infos-contact a:focus-visible{color:#3d4e38}
+.infos-contact .paiement{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(35,32,27,.12)}
 
 /* --- Footer --- */
-footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:var(--ink-faint)}
+footer{padding:2.5rem 0;border-top:1px solid rgba(35,32,27,.12);font-size:.88rem;color:#8a8276}
 .pied{display:grid;gap:.4rem}
 
 /* --- Reveal (subtle) --- */
@@ -157,23 +142,25 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
   .reveal{transition:none}
   .bouton{transition:none}
   html{scroll-behavior:auto}
-}
-</style>
+}.wp-block-post-title,header.wp-block-template-part,.wp-block-navigation,.wp-block-site-title{display:none!important}
+.entry-content,main,.is-layout-constrained>*,.has-global-padding{max-width:none!important;width:100%!important;margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
+.entry-content .hero h1{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;font-size:clamp(2.6rem,6vw,4.8rem)!important;max-width:13ch!important;text-align:left!important;color:#23201b!important}
+.entry-content h1,.entry-content h2,.entry-content h3{color:#23201b!important}
+
 </head>
 <body>
-
 <header>
   <div class="wrap tete">
     <div class="identite">
       <div class="nom">Le Studio des &Eacute;motifs</div>
       <div class="lieu">L&rsquo;Isle-Adam&nbsp;| Val-d&rsquo;Oise</div>
     </div>
-    <nav aria-label="Navigation principale">
+    <div class="nav-menu"  aria-label="Navigation principale">
       <a href="#accueil">Accueil</a>
       <a href="#accompagnements">Accompagnements</a>
       <a href="#cabinet">Cabinet</a>
       <a href="#contact">Contact</a>
-    </nav>
+    </div>
   </div>
 </header>
 
@@ -307,46 +294,23 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
           <h2>&Eacute;crire au Studio</h2>
           <p>La prise de rendez-vous se fait par email ou par DM sur Instagram.</p>
         </div>
-        <div class="contact-grid">
-          <form id="form-contact" action="#" onsubmit="return (function(){var n=document.getElementById('f-nom').value;var e=document.getElementById('f-email').value;var a=document.getElementById('f-accompagnement').value;var m=document.getElementById('f-message').value;var body='Nom: '+n+'%0D%0AEmail: '+e+'%0D%0AAccompagnement: '+a+'%0D%0A%0D%0A'+m;window.location.href='mailto:le.studio.des.emotifs@gmail.com?subject=Prise de contact — Le Studio des &Eacute;motifs&body='+body;return false})()">
-            <label>Votre nom
-              <input type="text" id="f-nom" name="Nom" required>
-            </label>
-            <label>Votre email
-              <input type="email" id="f-email" name="Email" required>
-            </label>
-            <label>Quel accompagnement vous int&eacute;resse&nbsp;?
-              <select id="f-accompagnement" name="Accompagnement">
-                <option value="" disabled selected>Choisissez un accompagnement</option>
-                <option value="Haptonomie">Haptonomie</option>
-                <option value="R&eacute;flexologie B&eacute;b&eacute; &eacute;motionnelle et Enfant">R&eacute;flexologie B&eacute;b&eacute; &eacute;motionnelle et Enfant</option>
-                <option value="C&acirc;linoth&eacute;rapie">C&acirc;linoth&eacute;rapie</option>
-                <option value="Autre">Autre / Je ne sais pas encore</option>
-              </select>
-            </label>
-            <label>Votre message
-              <textarea id="f-message" name="Message" required></textarea>
-            </label>
-            <button class="bouton plein" type="submit">Envoyer</button>
-          </form>
-          <div class="infos-contact">
-            <p><strong>Adresse</strong>1 A rue Mellet, L&rsquo;Isle-Adam, Val-d&rsquo;Oise</p>
-            <p><strong>Horaires</strong>Samedi et dimanche, de 9h &agrave; 18h</p>
-            <p><strong>Email</strong><a href="mailto:le.studio.des.emotifs@gmail.com">le.studio.des.emotifs@gmail.com</a></p>
-            <p><strong>Instagram</strong><a href="https://www.instagram.com/le.studio.des.emotifs?igsh=ZzFmMzZrejA4aTU3" target="_blank" rel="noopener">@le.studio.des.emotifs</a></p>
-            <p class="paiement"><strong>Moyens de paiement</strong>Esp&egrave;ces, Ch&egrave;ques, Virements instantan&eacute;s</p>
-          </div>
+        <div class="contact-actions">
+          <a class="bouton plein" href="mailto:le.studio.des.emotifs@gmail.com?subject=Prise de contact &mdash; Le Studio des &Eacute;motifs">Envoyer un email</a>
+          <a class="bouton insta" href="https://www.instagram.com/le.studio.des.emotifs?igsh=ZzFmMzZrejA4aTU3" target="_blank" rel="noopener" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+            Instagram
+          </a>
+        </div>
+        <div class="infos-contact">
+          <p><strong>Adresse</strong>1 A rue Mellet, L&rsquo;Isle-Adam, Val-d&rsquo;Oise</p>
+          <p><strong>Horaires</strong>Samedi et dimanche, de 9h &agrave; 18h</p>
+          <p><strong>Email</strong><a href="mailto:le.studio.des.emotifs@gmail.com">le.studio.des.emotifs@gmail.com</a></p>
+          <p><strong>Instagram</strong><a href="https://www.instagram.com/le.studio.des.emotifs?igsh=ZzFmMzZrejA4aTU3" target="_blank" rel="noopener">@le.studio.des.emotifs</a></p>
+          <p class="paiement"><strong>Moyens de paiement</strong>Esp&egrave;ces, Ch&egrave;ques, Virements instantan&eacute;s</p>
         </div>
       </div>
     </div>
   </section>
-</main>
-
-<footer>
-  <div class="wrap pied">
-    <div>Le Studio des &Eacute;motifs &mdash; L&rsquo;Isle-Adam, Val-d&rsquo;Oise</div>
-    <div>&copy; Le Studio des &Eacute;motifs</div>
-  </div>
 </footer>
 
 <script>
@@ -358,5 +322,4 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
 })();
 </script>
 
-</body>
 </html>
