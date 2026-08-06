@@ -40,8 +40,8 @@ header{position:sticky;top:0;z-index:50;background:#faf8f4;border-bottom:1px sol
 @media(max-width:768px){
   .tete{flex-direction:column;align-items:center;gap:.5rem;padding:.75rem 0}
   .identite .nom{font-size:1.1rem}
-  .nav-menu,nav{flex-wrap:wrap;justify-content:center}
-  .nav-menu a,nav a{padding:.45rem .55rem;font-size:.7rem}
+  .nav-menu,nav{width:100%;flex-wrap:nowrap;justify-content:center;gap:0}
+  .nav-menu a,nav a{padding:.35rem .28rem;font-size:.62rem;letter-spacing:.035em;white-space:nowrap}
 }
 
 /* --- Buttons --- */
@@ -74,9 +74,9 @@ header{position:sticky;top:0;z-index:50;background:#faf8f4;border-bottom:1px sol
 
 /* --- Bande activites (compact) --- */
 .bande-activites{padding:1.4rem 0;border-top:1px solid rgba(35,32,27,.12);border-bottom:1px solid rgba(35,32,27,.12);background:#dde4d9}
-.bande-inner{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
+.bande-inner{display:flex;align-items:center;gap:1.5rem;flex-wrap:nowrap}.bande-items{flex:1;flex-wrap:nowrap;justify-content:space-between;gap:.75rem}.bande-items li{white-space:nowrap}@media(max-width:768px){.bande-inner{gap:.7rem}.bande-label{font-size:.58rem}.bande-items{gap:.4rem;justify-content:flex-start}.bande-items a{font-size:.82rem}}
 .bande-label{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#3d4e38;font-weight:500;white-space:nowrap}
-.bande-items{display:flex;flex-wrap:wrap;gap:.5rem 2rem;list-style:none}
+.bande-items{display:flex;flex-wrap:nowrap;gap:.5rem 2rem;list-style:none}
 .bande-items a{font-family:'Cormorant Garamond', Georgia, serif;font-size:1rem;font-weight:500;color:#23201b;border-bottom:1px solid transparent;transition:border-color .35s,color .35s;padding-bottom:1px}
 .bande-items a:hover,.bande-items a:focus-visible{color:#3d4e38;border-color:#3d4e38}
 .bande-items a:focus-visible{outline:2px solid #3d4e38;outline-offset:4px;border-radius:2px}
