@@ -26,7 +26,7 @@ main,header,footer{position:relative;z-index:1}
 
 /* --- Header --- */
 header{position:sticky;top:0;z-index:50;background:#faf8f4;border-bottom:1px solid rgba(35,32,27,.12)}
-.tete{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:1rem 0}
+.tete{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:1rem 0;margin-inline:auto}
 .identite{min-width:0}
 .identite .nom{font-family:'Cormorant Garamond', Georgia, serif;font-size:1.25rem;font-weight:600;letter-spacing:.01em;white-space:nowrap}
 .identite{text-align:center}
@@ -149,7 +149,7 @@ footer{padding:2.5rem 0;border-top:1px solid rgba(35,32,27,.12);font-size:.88rem
 .reveal{opacity:1;transform:none}
 .revealed{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.bouton{transition:none}html{scroll-behavior:auto}}.wp-block-post-title,header.wp-block-template-part,.wp-block-navigation,.wp-block-site-title{display:none!important}
-.entry-content,main,.is-layout-constrained>*,.has-global-padding{max-width:none!important;width:100%!important;margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}
+.entry-content,main,.is-layout-constrained>*,.has-global-padding{max-width:none!important;width:100%!important;margin-left:0!important;margin-right:0!important;padding-left:0!important;padding-right:0!important}.entry-content .wrap{width:min(1120px,calc(100% - 2.5rem))!important;max-width:1120px!important;margin-left:auto!important;margin-right:auto!important;padding-left:0!important;padding-right:0!important;position:relative!important;left:50%!important;transform:translateX(-50%)!important}.entry-content .contact .wrap{width:100%!important;max-width:none!important}@media(max-width:768px){.entry-content .wrap{width:calc(100% - 2rem)!important}.entry-content .contact .wrap{width:100%!important}.entry-content .wrap{left:50%!important;transform:translateX(-50%)!important}}
 .entry-content .hero h1{font-family:'Cormorant Garamond',Georgia,serif!important;font-weight:600!important;font-size:clamp(2.6rem,6vw,4.8rem)!important;max-width:13ch!important;text-align:left!important;color:#23201b!important}
 .entry-content h1,.entry-content h2,.entry-content h3{color:#23201b!important}
 </style>
