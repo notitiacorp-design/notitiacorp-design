@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Le Studio des &Eacute;motifs &mdash; L&rsquo;Isle-Adam, Val d&rsquo;Oise</title>
-<meta name="description" content="Le Studio des &Eacute;motifs &mdash; Haptonomie, r&eacute;flexologie b&eacute;b&eacute; &eacute;motionnelle et c&acirc;linoth&eacute;rapie &agrave; L&rsquo;Isle-Adam, Val d&rsquo;Oise." />
+<title>Le Studio des &Eacute;motifs &mdash; L&rsquo;Isle-Adam, Val-d&rsquo;Oise</title>
+<meta name="description" content="Le Studio des &Eacute;motifs &mdash; Haptonomie, r&eacute;flexologie b&eacute;b&eacute; &eacute;motionnelle et c&acirc;linoth&eacute;rapie &agrave; L&rsquo;Isle-Adam, Val-d&rsquo;Oise." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -45,7 +45,8 @@ header{position:sticky;top:0;z-index:50;background:var(--cream);border-bottom:1p
 .tete{display:flex;align-items:center;justify-content:space-between;gap:var(--md);padding:1rem 0}
 .identite{min-width:0}
 .identite .nom{font-family:var(--serif);font-size:1.25rem;font-weight:600;letter-spacing:.01em;white-space:nowrap}
-.identite .lieu{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:400}
+.identite{text-align:center}
+.identite .lieu{font-size:.78rem;letter-spacing:.06em;color:var(--ink-soft);font-weight:400;margin-top:2px}
 nav{display:flex;gap:var(--xs)}
 nav a{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:400;padding:.5rem .6rem;position:relative;color:var(--ink-soft);transition:color .3s}
 nav a::after{content:'';position:absolute;left:.6rem;right:.6rem;bottom:.3rem;height:1px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.22,1,.36,1)}
@@ -53,8 +54,9 @@ nav a:hover,nav a:focus-visible{color:var(--ink)}
 nav a:hover::after,nav a:focus-visible::after{transform:scaleX(1)}
 nav a:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-radius:2px}
 @media(max-width:768px){
-  .tete{flex-direction:column;align-items:flex-start;gap:.5rem;padding:.75rem 0}
+  .tete{flex-direction:column;align-items:center;gap:.5rem;padding:.75rem 0}
   .identite .nom{font-size:1.1rem}
+  nav{flex-wrap:wrap;justify-content:center}
   nav a{padding:.45rem .55rem;font-size:.7rem}
 }
 
@@ -78,6 +80,8 @@ nav a:focus-visible{outline:2px solid var(--green);outline-offset:4px;border-rad
 .hero .etiquette{margin-bottom:1.2rem}
 .hero h1{max-width:13ch}
 .hero .accroche{margin-top:1.4rem;max-width:44ch;font-size:1.1rem;color:var(--ink-soft);font-weight:300}
+.hero .activites-ligne{margin-top:1rem;font-family:var(--serif);font-size:1.05rem;color:var(--green);font-weight:500;letter-spacing:.02em}
+.hero .activites-ligne span{color:var(--ink-faint);margin:0 .5rem}
 .hero .actions{margin-top:2.2rem;display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
 .portrait-cadre{background:var(--beige);border-radius:10px;aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
 .portrait-cadre img{width:100%;height:100%;object-fit:cover}
@@ -112,6 +116,7 @@ section{padding:clamp(2.5rem,5vw,4rem) 0}
 .accompagnement .visuel{border-radius:12px;overflow:hidden;background:var(--beige)}
 .accompagnement .visuel img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
 .status-badge{display:inline-block;margin-top:1.2rem;padding:.35rem .8rem;border:1px solid var(--rule);border-radius:999px;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.citation-calin{margin-top:1.4rem;padding:.6rem 0;font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--green);font-style:italic;line-height:1.5;border-left:none}
 @media(min-width:900px){
   .accompagnement{grid-template-columns:.9fr 1.1fr;align-items:start;gap:var(--huge)}
   .accompagnement.inverse{grid-template-columns:1.1fr .9fr}
@@ -139,6 +144,7 @@ select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12
 .infos-contact strong{display:block;font-weight:500;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:.2rem}
 .infos-contact a{transition:color .3s}
 .infos-contact a:hover,.infos-contact a:focus-visible{color:var(--green)}
+.infos-contact .paiement{margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--rule)}
 
 /* --- Footer --- */
 footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:var(--ink-faint)}
@@ -160,7 +166,7 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
   <div class="wrap tete">
     <div class="identite">
       <div class="nom">Le Studio des &Eacute;motifs</div>
-      <div class="lieu">L&rsquo;Isle-Adam &middot; Val d&rsquo;Oise</div>
+      <div class="lieu">L&rsquo;Isle-Adam&nbsp;| Val-d&rsquo;Oise</div>
     </div>
     <nav aria-label="Navigation principale">
       <a href="#accueil">Accueil</a>
@@ -179,6 +185,7 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
         <p class="etiquette">Le Studio des &Eacute;motifs</p>
         <h1>Ici est une invitation &agrave; la tendresse.</h1>
         <p class="accroche">Un accompagnement du lien gr&acirc;ce aux pouvoirs du toucher et des belles intentions.</p>
+        <p class="activites-ligne">Haptonomie <span>|</span> R&eacute;flexologie B&eacute;b&eacute; &eacute;motionnelle<sup>&reg;</sup> et Enfant <span>|</span> C&acirc;linoth&eacute;rapie</p>
         <div class="actions">
           <a class="bouton plein" href="#contact">Me contacter</a>
           <a class="bouton contour" href="#accompagnements">Mes accompagnements</a>
@@ -203,7 +210,7 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
       <p class="bande-label">Mes accompagnements</p>
       <ul class="bande-items">
         <li><a href="#haptonomie">Haptonomie</a></li>
-        <li><a href="#reflexologie">R&eacute;flexologie B&eacute;b&eacute;</a></li>
+        <li><a href="#reflexologie">R&eacute;flexologie B&eacute;b&eacute; &eacute;motionnelle<sup>&reg;</sup> et Enfant</a></li>
         <li><a href="#calinotherapie">C&acirc;linoth&eacute;rapie</a></li>
       </ul>
     </div>
@@ -222,7 +229,7 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
         </figure>
         <div class="texte">
           <p class="num">01</p>
-          <h3>Haptonomie &mdash; m&eacute;thode Hapto bien-na&icirc;tre</h3>
+          <h3>Haptonomie &mdash; M&eacute;thode Hapto Bien Na&icirc;tre<sup>&reg;</sup></h3>
           <p style="margin-top:.3rem;color:var(--ink-soft)">D&egrave;s le 4&egrave;me mois de grossesse &mdash; accompagner le lien, avant et apr&egrave;s la naissance.</p>
           <p style="margin-top:1.2rem">Au fil des 9 mois, imaginez un monde o&ugrave; les m&egrave;res porteraient les enfants et les p&egrave;res porteraient les m&egrave;res. Imaginez un monde o&ugrave; une grossesse serait v&eacute;ritablement v&eacute;cue &agrave; deux, affectivement, accompagn&eacute;e par des p&egrave;res qui sauraient comment se rendre pr&eacute;sents.</p>
           <p>Un accompagnement vers l&rsquo;unit&eacute; du couple et la rencontre avec votre b&eacute;b&eacute; plusieurs mois avant sa naissance gr&acirc;ce au toucher doux et &agrave; vos belles intentions, afin que chaque parent trouve sa place dans la construction de sa famille &agrave; chaque &eacute;tape de cette grossesse, &agrave; l&rsquo;accouchement et apr&egrave;s.</p>
@@ -243,7 +250,7 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
         </figure>
         <div class="texte">
           <p class="num">02</p>
-          <h3>R&eacute;flexologie B&eacute;b&eacute; &eacute;motionnelle et Enfant</h3>
+          <h3>R&eacute;flexologie B&eacute;b&eacute; &eacute;motionnelle<sup>&reg;</sup> et Enfant</h3>
           <p style="margin-top:.3rem;color:var(--ink-soft)">Jusqu&rsquo;&agrave; 11 ans.</p>
           <span class="status-badge">Texte en cours de r&eacute;daction</span>
           <div class="details">
@@ -267,6 +274,7 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
           <p>Rien de sexuel, rien d&rsquo;&eacute;rotique ou de d&eacute;shabill&eacute;, rien qui ne manque de respect &agrave; votre intimit&eacute;, mais simplement mes bras pour vous permettre de d&eacute;poser ce que vous portez de trop lourd, de trop faux, de trop vite, de trop dur, de trop pr&eacute;sent pour les autres et de ne pas assez pour vous.</p>
           <p>J&rsquo;accueille dans mes bras toutes celles qui traversent une &eacute;preuve de vie, une fragilit&eacute; du c&oelig;ur, une fatigue du corps ou qui veulent simplement &ecirc;tre entour&eacute;es de douceur. Offrez-vous une pause pour vous sentir port&eacute;e, soutenue, dorlot&eacute;e, regard&eacute;e, aim&eacute;e.</p>
           <p>Une invitation au r&eacute;confort et &agrave; la reconnaissance de tout ce qu&rsquo;il y a de beau en vous. Un r&eacute;pit pour toutes les funambules de la vie.</p>
+          <blockquote class="citation-calin">&laquo;&nbsp;Un c&acirc;lin c&rsquo;est une preuve grandiose du pouvoir de la tendresse sur le corps et l&rsquo;esprit.&nbsp;&raquo;</blockquote>
           <div class="details">
             <div><strong>Pour qui</strong>S&eacute;ance individuelle avec les femmes. Accompagnement &agrave; la tendresse et &agrave; la qualit&eacute; de pr&eacute;sence d&rsquo;un couple possible.</div>
             <div><strong>Avant la s&eacute;ance</strong>Un premier &eacute;change t&eacute;l&eacute;phonique est n&eacute;cessaire.</div>
@@ -297,35 +305,36 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
         <div class="tete-section">
           <p class="etiquette">Contact</p>
           <h2>&Eacute;crire au Studio</h2>
-          <p>La prise de rendez-vous se fait uniquement par email ou par DM sur Instagram.</p>
+          <p>La prise de rendez-vous se fait par email ou par DM sur Instagram.</p>
         </div>
         <div class="contact-grid">
-          <form action="mailto:le.studio.des.emotifs@gmail.com" method="post" enctype="text/plain">
+          <form id="form-contact" action="#" onsubmit="return (function(){var n=document.getElementById('f-nom').value;var e=document.getElementById('f-email').value;var a=document.getElementById('f-accompagnement').value;var m=document.getElementById('f-message').value;var body='Nom: '+n+'%0D%0AEmail: '+e+'%0D%0AAccompagnement: '+a+'%0D%0A%0D%0A'+m;window.location.href='mailto:le.studio.des.emotifs@gmail.com?subject=Prise de contact — Le Studio des &Eacute;motifs&body='+body;return false})()">
             <label>Votre nom
-              <input type="text" name="Nom" required>
+              <input type="text" id="f-nom" name="Nom" required>
             </label>
             <label>Votre email
-              <input type="email" name="Email" required>
+              <input type="email" id="f-email" name="Email" required>
             </label>
-            <label>Quel accompagnement vous int&eacute;resse ?
-              <select name="Accompagnement">
+            <label>Quel accompagnement vous int&eacute;resse&nbsp;?
+              <select id="f-accompagnement" name="Accompagnement">
                 <option value="" disabled selected>Choisissez un accompagnement</option>
-                <option value="Haptonomie">Haptonomie &mdash; m&eacute;thode Hapto bien-na&icirc;tre</option>
-                <option value="R&eacute;flexologie">R&eacute;flexologie B&eacute;b&eacute; &eacute;motionnelle et Enfant</option>
+                <option value="Haptonomie">Haptonomie</option>
+                <option value="R&eacute;flexologie B&eacute;b&eacute; &eacute;motionnelle et Enfant">R&eacute;flexologie B&eacute;b&eacute; &eacute;motionnelle et Enfant</option>
                 <option value="C&acirc;linoth&eacute;rapie">C&acirc;linoth&eacute;rapie</option>
                 <option value="Autre">Autre / Je ne sais pas encore</option>
               </select>
             </label>
             <label>Votre message
-              <textarea name="Message" required></textarea>
+              <textarea id="f-message" name="Message" required></textarea>
             </label>
-            <button class="bouton plein" type="submit">Envoyer le message</button>
+            <button class="bouton plein" type="submit">Envoyer</button>
           </form>
           <div class="infos-contact">
+            <p><strong>Adresse</strong>1 A rue Mellet, L&rsquo;Isle-Adam, Val-d&rsquo;Oise</p>
+            <p><strong>Horaires</strong>Samedi et dimanche, de 9h &agrave; 18h</p>
             <p><strong>Email</strong><a href="mailto:le.studio.des.emotifs@gmail.com">le.studio.des.emotifs@gmail.com</a></p>
             <p><strong>Instagram</strong><a href="https://www.instagram.com/le.studio.des.emotifs?igsh=ZzFmMzZrejA4aTU3" target="_blank" rel="noopener">@le.studio.des.emotifs</a></p>
-            <p><strong>Adresse</strong>1 A rue Mellet, L&rsquo;Isle-Adam, Val d&rsquo;Oise</p>
-            <p><strong>Horaires</strong>Samedi et dimanche, de 9h &agrave; 18h</p>
+            <p class="paiement"><strong>Moyens de paiement</strong>Esp&egrave;ces, Ch&egrave;ques, Virements instantan&eacute;s</p>
           </div>
         </div>
       </div>
@@ -335,7 +344,7 @@ footer{padding:2.5rem 0;border-top:1px solid var(--rule);font-size:.88rem;color:
 
 <footer>
   <div class="wrap pied">
-    <div>Le Studio des &Eacute;motifs &mdash; L&rsquo;Isle-Adam, Val d&rsquo;Oise</div>
+    <div>Le Studio des &Eacute;motifs &mdash; L&rsquo;Isle-Adam, Val-d&rsquo;Oise</div>
     <div>&copy; Le Studio des &Eacute;motifs</div>
   </div>
 </footer>
