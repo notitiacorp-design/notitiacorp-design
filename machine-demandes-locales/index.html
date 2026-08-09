@@ -4,118 +4,200 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Machine à Demandes Locales — Notitia</title>
-<meta name="description" content="En 7 jours : mini-site mobile, offre claire, formulaire, préparation Google. 490 € TTC, acompte 245 €. Pour artisans et indépendants locaux.">
+<meta name="description" content="En 7 jours : mini-site mobile, offre claire, formulaire, préparation Google. 490 € TTC, acompte 245 €.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://notitiacorp-design.github.io/notitiacorp-design/machine-demandes-locales/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f3ecdf;
-    --bg-2: #e8dfcf;
-    --ink: #1c1712;
-    --muted: #5c5348;
-    --line: #cfc3ae;
-    --card: #fffaf2;
-    --rust: #b54a2e;
-    --rust-deep: #8f3520;
-    --forest: #2f4a3a;
-    --note: #fff1c9;
-    --shadow: 0 18px 40px rgba(40, 28, 14, 0.08);
+    --bg: #efe6d6;
+    --bg-deep: #e4d8c4;
+    --cream: #fbf6ec;
+    --ink: #17130f;
+    --ink-2: #3d342b;
+    --muted: #6a5e50;
+    --line: rgba(23,19,15,.12);
+    --rust: #c24a2e;
+    --rust-2: #9a3520;
+    --moss: #2c4a3a;
+    --moss-soft: #3d6b52;
+    --gold: #c9a227;
+    --note: #ffe9a8;
+    --ease: cubic-bezier(.22,1,.36,1);
+    --ease-out: cubic-bezier(.16,1,.3,1);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
     font-family: "IBM Plex Sans", system-ui, sans-serif;
     color: var(--ink);
-    background:
-      radial-gradient(circle at 12% 8%, rgba(181,74,46,.08), transparent 28%),
-      radial-gradient(circle at 88% 18%, rgba(47,74,58,.07), transparent 26%),
-      linear-gradient(180deg, #f7f1e6 0%, var(--bg) 40%, #efe6d6 100%);
-    line-height: 1.55;
-    min-height: 100vh;
+    background: var(--bg);
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
   }
-  a { color: var(--rust-deep); }
-  a:hover { color: var(--rust); }
-  .page {
-    width: min(1080px, calc(100% - 2rem));
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 400;
+    opacity: .045;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a { color: inherit; }
+  .noise-orb {
+    position: fixed;
+    width: 55vw;
+    height: 55vw;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: .22;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: multiply;
+  }
+  .orb-a { background: #e8b48a; top: -12vw; right: -10vw; }
+  .orb-b { background: #9bb7a4; bottom: 10vh; left: -18vw; opacity: .16; }
+
+  .shell {
+    position: relative;
+    z-index: 1;
+    width: min(1180px, calc(100% - 2.5rem));
     margin: 0 auto;
-    padding: 1.25rem 0 4rem;
+    padding: 1.4rem 0 5rem;
   }
-  header {
+
+  /* NAV */
+  .nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.2rem;
+    position: sticky;
+    top: .75rem;
+    z-index: 50;
+    padding: .65rem .85rem .65rem 1rem;
+    border-radius: 999px;
+    background: rgba(251,246,236,.72);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(16px) saturate(1.2);
+    box-shadow: 0 10px 30px rgba(40,28,14,.06);
   }
   .brand {
     font-family: "Fraunces", Georgia, serif;
-    font-weight: 600;
-    font-size: 1.35rem;
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    font-size: 1.2rem;
     text-decoration: none;
-    color: var(--ink);
+    letter-spacing: -.02em;
   }
-  .brand small {
-    display: block;
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: .72rem;
+  .brand em {
+    font-style: italic;
     font-weight: 500;
+    color: var(--rust);
+  }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: .9rem;
+  }
+  .nav-meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .68rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
     color: var(--muted);
-    letter-spacing: .04em;
-    margin-top: .15rem;
   }
-  .top-link {
+  .nav-cta {
     text-decoration: none;
-    color: var(--ink);
-    border-bottom: 1.5px solid var(--rust);
-    font-weight: 500;
-    font-size: .95rem;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: .85rem;
+    font-weight: 600;
+    padding: .55rem 1rem;
+    border-radius: 999px;
+    transition: transform .25s var(--ease), background .25s;
   }
+  .nav-cta:hover { transform: translateY(-1px); background: var(--rust); }
+
+  /* HERO */
   .hero {
     display: grid;
-    grid-template-columns: 1.25fr .85fr;
-    gap: 2rem;
-    align-items: start;
-    margin-bottom: 3rem;
+    grid-template-columns: 1.05fr .95fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    min-height: min(82vh, 780px);
+    margin-bottom: 4.5rem;
   }
   .kicker {
-    display: inline-block;
-    background: var(--note);
-    border: 1px solid #e4d39a;
-    border-radius: 999px;
-    padding: .35rem .75rem;
-    font-size: .8rem;
-    font-weight: 500;
-    color: #6a5420;
-    margin-bottom: 1rem;
-    transform: rotate(-1.2deg);
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 1.15rem;
   }
-  h1 {
+  .kicker i {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--rust);
+    box-shadow: 0 0 0 0 rgba(194,74,46,.5);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(194,74,46,.45); }
+    70% { box-shadow: 0 0 0 12px rgba(194,74,46,0); }
+    100% { box-shadow: 0 0 0 0 rgba(194,74,46,0); }
+  }
+  .hero h1 {
     font-family: "Fraunces", Georgia, serif;
-    font-size: clamp(2.3rem, 5.5vw, 3.7rem);
-    line-height: 1.05;
-    letter-spacing: -.03em;
     font-weight: 600;
-    max-width: 11ch;
-    margin-bottom: 1.1rem;
+    font-size: clamp(2.8rem, 7vw, 5.1rem);
+    line-height: .95;
+    letter-spacing: -.04em;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 .line {
+    display: block;
+    overflow: hidden;
+  }
+  .hero h1 .line span {
+    display: block;
+    transform: translateY(110%);
+    animation: rise .9s var(--ease-out) forwards;
+  }
+  .hero h1 .line:nth-child(2) span { animation-delay: .1s; }
+  .hero h1 .line:nth-child(3) span { animation-delay: .2s; }
+  .hero h1 .accent {
+    font-style: italic;
+    color: var(--rust);
+  }
+  @keyframes rise {
+    to { transform: translateY(0); }
   }
   .lead {
-    font-family: "Source Serif 4", Georgia, serif;
-    font-size: 1.18rem;
-    color: var(--muted);
-    max-width: 34ch;
-    margin-bottom: 1.4rem;
+    font-size: 1.12rem;
+    color: var(--ink-2);
+    max-width: 36ch;
+    margin-bottom: 1.6rem;
+    opacity: 0;
+    animation: fadeup .8s var(--ease-out) .35s forwards;
   }
-  .lead strong { color: var(--ink); font-weight: 600; }
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: none; }
+  }
   .actions {
     display: flex;
     flex-wrap: wrap;
     gap: .75rem;
     align-items: center;
-    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeup .8s var(--ease-out) .48s forwards;
   }
   .btn {
     appearance: none;
@@ -125,233 +207,555 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: .9rem 1.15rem;
-    border-radius: 999px;
+    gap: .45rem;
     font: inherit;
     font-weight: 600;
+    border-radius: 999px;
+    padding: .95rem 1.25rem;
+    transition: transform .25s var(--ease), box-shadow .25s var(--ease), background .25s;
   }
   .btn-main {
     background: var(--rust);
-    color: #fff8f4;
-    box-shadow: 0 10px 0 var(--rust-deep);
+    color: #fff7f2;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.2) inset,
+      0 14px 28px rgba(194,74,46,.28);
   }
-  .btn-main:hover { transform: translateY(1px); box-shadow: 0 9px 0 var(--rust-deep); }
-  .btn-main:active { transform: translateY(4px); box-shadow: 0 6px 0 var(--rust-deep); }
-  .btn-soft {
+  .btn-main:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: #d25538;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.25) inset,
+      0 18px 34px rgba(194,74,46,.34);
+  }
+  .btn-ghost {
     background: transparent;
     color: var(--ink);
-    border: 1.5px solid var(--ink);
+    border: 1.5px solid rgba(23,19,15,.22);
   }
-  .btn-soft:hover { background: rgba(28,23,18,.04); }
-  .aside-card {
-    background: var(--card);
-    border: 1.5px solid var(--line);
-    border-radius: 18px;
-    padding: 1.25rem 1.3rem 1.4rem;
-    box-shadow: var(--shadow);
-    transform: rotate(1deg);
+  .btn-ghost:hover { background: rgba(23,19,15,.04); transform: translateY(-1px); }
+  .fine {
+    margin-top: 1rem;
+    font-size: .86rem;
+    color: var(--muted);
+    max-width: 40ch;
+    opacity: 0;
+    animation: fadeup .8s var(--ease-out) .6s forwards;
   }
-  .aside-card h2 {
+
+  /* PHONE STAGE — signature */
+  .stage {
+    position: relative;
+    height: min(640px, 78vh);
+    display: grid;
+    place-items: center;
+    opacity: 0;
+    animation: fadeup 1s var(--ease-out) .25s forwards;
+  }
+  .stage-glow {
+    position: absolute;
+    width: 70%;
+    height: 55%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(194,74,46,.22), transparent 68%);
+    filter: blur(10px);
+    z-index: 0;
+  }
+  .phone {
+    position: relative;
+    width: min(290px, 72vw);
+    aspect-ratio: 9/18.5;
+    border-radius: 36px;
+    background: linear-gradient(160deg, #2a2420, #14110f 55%, #0d0b0a);
+    padding: 10px;
+    box-shadow:
+      0 40px 80px rgba(30,18,8,.28),
+      0 2px 0 rgba(255,255,255,.08) inset,
+      0 -1px 0 rgba(0,0,0,.5) inset;
+    z-index: 2;
+    transform: perspective(1000px) rotateY(-14deg) rotateX(6deg) rotateZ(2deg);
+    transition: transform .6s var(--ease);
+  }
+  .stage:hover .phone {
+    transform: perspective(1000px) rotateY(-6deg) rotateX(2deg) rotateZ(0deg) translateY(-6px);
+  }
+  .phone-notch {
+    position: absolute;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    width: 88px; height: 22px;
+    background: #0a0908;
+    border-radius: 999px;
+    z-index: 5;
+  }
+  .phone-screen {
+    height: 100%;
+    border-radius: 28px;
+    overflow: hidden;
+    background: #f7f1e6;
+    position: relative;
+  }
+  .mock {
+    height: 100%;
+    overflow: hidden;
+    font-size: 11px;
+    color: #1b1713;
+    display: flex;
+    flex-direction: column;
+  }
+  .mock-top {
+    padding: 38px 14px 12px;
+    background:
+      linear-gradient(135deg, rgba(44,74,58,.12), transparent 50%),
+      #f3ebdc;
+  }
+  .mock-badge {
+    display: inline-block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 8px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--moss);
+    margin-bottom: 8px;
+  }
+  .mock h3 {
     font-family: "Fraunces", Georgia, serif;
-    font-size: 1.35rem;
+    font-size: 22px;
+    line-height: 1.05;
+    letter-spacing: -.02em;
+    margin-bottom: 6px;
+  }
+  .mock h3 i { font-style: italic; color: var(--rust); }
+  .mock-top p { color: #5c5348; font-size: 10.5px; max-width: 22ch; }
+  .mock-cta {
+    margin-top: 10px;
+    display: inline-flex;
+    background: var(--rust);
+    color: white;
+    border-radius: 999px;
+    padding: 7px 11px;
+    font-weight: 600;
+    font-size: 10px;
+  }
+  .mock-body { padding: 12px 14px; display: grid; gap: 8px; }
+  .mock-row {
+    background: white;
+    border: 1px solid rgba(23,19,15,.08);
+    border-radius: 12px;
+    padding: 9px 10px;
+  }
+  .mock-row b { display: block; font-size: 11px; margin-bottom: 2px; }
+  .mock-row span { color: #6a5e50; font-size: 10px; }
+  .mock-bar {
+    margin-top: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    padding: 10px 12px 16px;
+    background: rgba(255,255,255,.7);
+    border-top: 1px solid rgba(23,19,15,.06);
+  }
+  .mock-bar div {
+    text-align: center;
+    background: var(--ink);
+    color: #f7f1e6;
+    border-radius: 10px;
+    padding: 9px 6px;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  .mock-bar div:last-child { background: var(--moss); }
+
+  .float-card {
+    position: absolute;
+    z-index: 3;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: .85rem 1rem;
+    box-shadow: 0 18px 40px rgba(40,28,14,.12);
+    width: min(200px, 46vw);
+    backdrop-filter: blur(8px);
+  }
+  .float-a {
+    top: 8%;
+    left: 0;
+    transform: rotate(-6deg);
+    animation: floaty 5.5s ease-in-out infinite;
+  }
+  .float-b {
+    bottom: 12%;
+    right: 0;
+    transform: rotate(4deg);
+    background: var(--note);
+    border-color: #e5cf7c;
+    animation: floaty 6.2s ease-in-out infinite reverse;
+  }
+  @keyframes floaty {
+    0%,100% { translate: 0 0; }
+    50% { translate: 0 -10px; }
+  }
+  .float-card .label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .62rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .35rem;
+  }
+  .float-card strong {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.05rem;
+    display: block;
+    line-height: 1.2;
+  }
+  .float-card p {
+    margin-top: .3rem;
+    font-size: .8rem;
+    color: var(--ink-2);
+  }
+
+  /* MARQUEE */
+  .marquee-wrap {
+    margin: 0 -1.25rem 4.5rem;
+    border-block: 1px solid var(--line);
+    background: rgba(251,246,236,.45);
+    overflow: hidden;
+    padding: .9rem 0;
+  }
+  .marquee {
+    display: flex;
+    gap: 2.2rem;
+    width: max-content;
+    animation: slide 28s linear infinite;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.15rem;
+    color: var(--ink-2);
+  }
+  .marquee span { white-space: nowrap; }
+  .marquee em { font-style: italic; color: var(--rust); }
+  @keyframes slide {
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  section { margin-bottom: 4.5rem; }
+  .sec-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: end;
+    margin-bottom: 1.4rem;
+  }
+  .sec-head h2 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    letter-spacing: -.03em;
+    line-height: 1.05;
+    max-width: 14ch;
+  }
+  .sec-head p {
+    color: var(--muted);
+    max-width: 28ch;
+    font-size: .95rem;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr .9fr;
+    gap: 1rem;
+  }
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 1.35rem 1.3rem 1.45rem;
+    box-shadow: 0 10px 30px rgba(40,28,14,.04);
+    transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(40,28,14,.08);
+  }
+  .card.feature {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(194,74,46,.12), transparent 45%),
+      var(--ink);
+    color: #f6efe4;
+    border-color: transparent;
+  }
+  .card.feature p { color: #cfc4b4; }
+  .card .n {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: .7rem;
+  }
+  .card.feature .n { color: #f0a58f; }
+  .card h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.45rem;
+    letter-spacing: -.02em;
     margin-bottom: .55rem;
   }
-  .price {
-    font-family: "Fraunces", Georgia, serif;
-    font-size: 2.4rem;
-    line-height: 1;
-    margin: .4rem 0 .2rem;
-  }
-  .price span {
-    font-size: 1rem;
-    color: var(--muted);
-    font-family: "IBM Plex Sans", sans-serif;
-  }
-  .aside-card p { color: var(--muted); font-size: .95rem; }
-  .aside-card ul {
+  .card p { color: var(--muted); font-size: .95rem; }
+  .card ul {
     list-style: none;
     margin-top: 1rem;
     display: grid;
     gap: .45rem;
   }
-  .aside-card li {
-    padding-left: 1rem;
+  .card li {
     position: relative;
-    font-size: .95rem;
+    padding-left: 1.1rem;
+    font-size: .92rem;
+    color: inherit;
   }
-  .aside-card li::before {
-    content: "→";
+  .card li::before {
+    content: "";
     position: absolute;
-    left: 0;
-    color: var(--rust);
-    font-weight: 600;
+    left: 0; top: .55em;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--rust);
   }
-  .strip {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 1.25rem;
-    margin-bottom: 2.5rem;
-  }
-  .panel {
-    background: rgba(255,250,242,.72);
-    border: 1.5px solid var(--line);
-    border-radius: 16px;
-    padding: 1.35rem 1.4rem;
-  }
-  .panel h3 {
+  .card.feature li { color: #e8ddd0; }
+  .card.feature li::before { background: #f0a58f; }
+  .price-xl {
     font-family: "Fraunces", Georgia, serif;
-    font-size: 1.35rem;
-    margin-bottom: .7rem;
+    font-size: 3rem;
+    line-height: 1;
+    margin: .4rem 0 .25rem;
   }
-  .panel p, .panel li {
-    color: var(--muted);
-    font-size: .98rem;
+  .price-xl small {
+    font-size: 1rem;
+    color: #cfc4b4;
+    font-family: "IBM Plex Sans", sans-serif;
   }
-  .panel ul {
-    margin: .7rem 0 0 1.1rem;
+
+  /* STEPS TIMELINE */
+  .timeline {
     display: grid;
-    gap: .35rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+    margin-top: .5rem;
   }
-  .panel.out {
-    background: transparent;
-    border-style: dashed;
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--line), var(--line), transparent);
   }
-  .story {
+  .t-step {
+    padding: 0 .8rem;
+    text-align: center;
+    position: relative;
+  }
+  .t-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    margin: 0 auto 1rem;
+    background: var(--cream);
+    border: 2px solid var(--rust);
+    box-shadow: 0 0 0 6px rgba(194,74,46,.08);
+    position: relative;
+    z-index: 1;
+  }
+  .t-step h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.15rem;
+    margin-bottom: .35rem;
+  }
+  .t-step p { color: var(--muted); font-size: .9rem; }
+
+  /* DEMO */
+  .demo {
     display: grid;
-    grid-template-columns: .9fr 1.1fr;
-    gap: 1.5rem;
-    margin-bottom: 2.75rem;
-    align-items: stretch;
+    grid-template-columns: .85fr 1.15fr;
+    gap: 1rem;
   }
-  .sticky-note {
+  .note {
     background: var(--note);
-    border: 1px solid #e2cf8f;
-    border-radius: 4px 14px 14px 14px;
-    padding: 1.3rem 1.25rem;
-    box-shadow: 4px 8px 0 rgba(120, 90, 20, .08);
-    transform: rotate(-1.5deg);
+    border: 1px solid #e5cf7c;
+    border-radius: 4px 22px 22px 22px;
+    padding: 1.4rem 1.3rem;
+    box-shadow: 8px 12px 0 rgba(120,90,20,.06);
+    transform: rotate(-1.4deg);
   }
-  .sticky-note .tag {
-    display: inline-block;
-    font-size: .72rem;
-    font-weight: 600;
-    letter-spacing: .06em;
+  .note .tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .68rem;
+    letter-spacing: .1em;
     text-transform: uppercase;
     color: #7a5d18;
     margin-bottom: .7rem;
   }
-  .sticky-note h3 {
-    font-family: "Source Serif 4", Georgia, serif;
-    font-size: 1.25rem;
-    line-height: 1.35;
-    margin-bottom: .7rem;
-  }
-  .sticky-note p { color: #4d431f; font-size: .95rem; }
-  .how h2, .start h2 {
+  .note h3 {
     font-family: "Fraunces", Georgia, serif;
-    font-size: clamp(1.7rem, 3vw, 2.2rem);
+    font-size: 1.45rem;
+    line-height: 1.2;
+    margin-bottom: .6rem;
+  }
+  .note p { color: #4f431c; }
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .8rem;
+  }
+  .cmp {
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    padding: 1.1rem;
+    background: var(--cream);
+  }
+  .cmp.before {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(23,19,15,.02),
+      rgba(23,19,15,.02) 8px,
+      rgba(23,19,15,.045) 8px,
+      rgba(23,19,15,.045) 16px
+    );
+  }
+  .cmp .lbl {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .68rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: .5rem;
+  }
+  .cmp h4 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.15rem;
     margin-bottom: .4rem;
   }
-  .how > p, .start > p {
-    color: var(--muted);
-    max-width: 48ch;
-    margin-bottom: 1.2rem;
+  .cmp p { color: var(--muted); font-size: .9rem; }
+  .cmp.after {
+    border-color: rgba(194,74,46,.25);
+    box-shadow: 0 0 0 1px rgba(194,74,46,.05);
   }
-  .steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: .85rem;
-    margin-bottom: 2.8rem;
-  }
-  .step {
-    background: var(--card);
-    border: 1.5px solid var(--line);
-    border-radius: 14px;
-    padding: 1rem;
-    min-height: 150px;
-  }
-  .step:nth-child(2) { transform: translateY(10px); }
-  .step:nth-child(4) { transform: translateY(6px); }
-  .step b {
-    display: block;
-    font-family: "Fraunces", Georgia, serif;
-    font-size: 1.5rem;
-    color: var(--forest);
-    margin-bottom: .35rem;
-  }
-  .step h3 {
-    font-size: 1rem;
-    margin-bottom: .35rem;
-  }
-  .step p {
-    color: var(--muted);
-    font-size: .9rem;
-  }
+
+  /* START */
   .start {
     display: grid;
-    grid-template-columns: 1fr 1.05fr;
-    gap: 1.4rem;
-    align-items: start;
+    grid-template-columns: .9fr 1.1fr;
+    gap: 1rem;
+    align-items: stretch;
   }
   .pay {
-    background: var(--forest);
+    background:
+      radial-gradient(circle at 0% 100%, rgba(240,165,143,.18), transparent 40%),
+      linear-gradient(165deg, #243d31, #1a2e25 55%, #13231c);
     color: #f3ecdf;
-    border-radius: 18px;
-    padding: 1.4rem 1.35rem;
+    border-radius: 24px;
+    padding: 1.6rem 1.45rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .pay::after {
+    content: "";
+    position: absolute;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    right: -40px; top: -40px;
+    background: radial-gradient(circle, rgba(255,255,255,.08), transparent 70%);
   }
   .pay h3 {
     font-family: "Fraunces", Georgia, serif;
-    font-size: 1.4rem;
-    margin-bottom: .6rem;
+    font-size: 1.7rem;
+    margin-bottom: .55rem;
+    position: relative;
   }
-  .pay p { color: #d7d0c2; font-size: .95rem; margin-bottom: .7rem; }
+  .pay p {
+    color: #c9c0b1;
+    font-size: .95rem;
+    margin-bottom: .75rem;
+    position: relative;
+  }
   .pay code {
     display: block;
-    background: rgba(0,0,0,.18);
-    border-radius: 10px;
-    padding: .7rem .8rem;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: .84rem;
-    color: #fff8ea;
-    margin: .35rem 0 .7rem;
+    background: rgba(0,0,0,.22);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 12px;
+    padding: .75rem .85rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .82rem;
+    color: #fff6e8;
+    margin: .3rem 0 .75rem;
     word-break: break-all;
+    position: relative;
   }
+  .pay a { color: #ffc9b4; }
+
   form {
-    background: var(--card);
-    border: 1.5px solid var(--line);
-    border-radius: 18px;
-    padding: 1.25rem;
-    box-shadow: var(--shadow);
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 1.4rem;
+    box-shadow: 0 20px 50px rgba(40,28,14,.07);
     display: grid;
-    gap: .75rem;
+    gap: .7rem;
+    position: relative;
   }
+  form::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(194,74,46,.35), transparent 40%, rgba(44,74,58,.25));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  form h3 {
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.5rem;
+    letter-spacing: -.02em;
+  }
+  .form-note { font-size: .84rem; color: var(--muted); }
   label {
     display: grid;
-    gap: .3rem;
-    font-size: .86rem;
+    gap: .28rem;
+    font-size: .82rem;
     font-weight: 500;
+    color: var(--ink-2);
+  }
+  .row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .7rem;
   }
   input, textarea {
     width: 100%;
-    border: 1.5px solid var(--line);
-    border-radius: 10px;
-    padding: .75rem .8rem;
+    border: 1.5px solid rgba(23,19,15,.12);
+    border-radius: 12px;
+    padding: .78rem .85rem;
     font: inherit;
     background: #fff;
     color: var(--ink);
+    transition: border-color .2s, box-shadow .2s;
   }
   input:focus, textarea:focus {
-    outline: 2px solid rgba(181,74,46,.25);
-    border-color: var(--rust);
+    outline: none;
+    border-color: rgba(194,74,46,.55);
+    box-shadow: 0 0 0 4px rgba(194,74,46,.12);
   }
-  textarea { min-height: 96px; resize: vertical; }
-  .form-note {
-    font-size: .82rem;
-    color: var(--muted);
-  }
+  textarea { min-height: 88px; resize: vertical; }
+  form .btn-main { width: 100%; margin-top: .2rem; }
+
   footer {
-    margin-top: 3rem;
-    padding-top: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.2rem;
     border-top: 1px solid var(--line);
     display: flex;
     justify-content: space-between;
@@ -360,141 +764,257 @@
     color: var(--muted);
     font-size: .88rem;
   }
-  @media (max-width: 860px) {
-    .hero, .strip, .story, .start, .steps { grid-template-columns: 1fr; }
-    .aside-card, .step, .sticky-note { transform: none; }
-    h1 { max-width: none; }
-    .page { width: min(1080px, calc(100% - 1.25rem)); }
+
+  /* reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+  .d1 { transition-delay: .08s; }
+  .d2 { transition-delay: .16s; }
+  .d3 { transition-delay: .24s; }
+
+  @media (max-width: 920px) {
+    .hero, .grid-3, .demo, .start, .timeline, .row-2 { grid-template-columns: 1fr; }
+    .timeline::before { display: none; }
+    .hero { min-height: auto; }
+    .stage { height: auto; min-height: 520px; margin-top: 1rem; }
+    .phone {
+      transform: perspective(1000px) rotateY(0) rotateX(0) rotateZ(0);
+    }
+    .stage:hover .phone { transform: translateY(-4px); }
+    .float-a { left: 2%; top: 2%; }
+    .float-b { right: 2%; bottom: 4%; }
+    .sec-head { flex-direction: column; align-items: start; }
+    .nav-meta { display: none; }
+    .shell { width: min(1180px, calc(100% - 1.25rem)); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+    .hero h1 .line span, .lead, .actions, .fine, .stage { opacity: 1; transform: none; }
+    .reveal { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
-  <div class="page">
-    <header>
-      <a class="brand" href="#top">Notitia<small>présence locale, sans cinéma</small></a>
-      <a class="top-link" href="#demarrer">Je veux en parler</a>
-    </header>
+  <div class="noise-orb orb-a" aria-hidden="true"></div>
+  <div class="noise-orb orb-b" aria-hidden="true"></div>
 
-    <section class="hero" id="top">
+  <div class="shell">
+    <nav class="nav">
+      <a class="brand" href="#top">Noti<em>tia</em></a>
+      <div class="nav-right">
+        <span class="nav-meta">Beta · 7 jours · 490 €</span>
+        <a class="nav-cta" href="#demarrer">Démarrer</a>
+      </div>
+    </nav>
+
+    <header class="hero" id="top">
       <div>
-        <span class="kicker">Offre beta · 7 jours · 490 €</span>
-        <h1>On vous rend contactable.</h1>
+        <div class="kicker"><i></i> Présence locale qui ramène des messages</div>
+        <h1>
+          <span class="line"><span>On vous rend</span></span>
+          <span class="line"><span class="accent">contactable.</span></span>
+          <span class="line"><span>Point.</span></span>
+        </h1>
         <p class="lead">
-          Vous êtes bon dans votre métier. Sur Google, personne ne le voit.
-          En une semaine, on pose une <strong>présence locale simple</strong> :
-          page claire, message net, bouton pour vous écrire ou vous appeler.
+          Vous êtes fort sur le terrain. Sur Google, votre page (ou l’absence de page) laisse partir les gens ailleurs.
+          En 7 jours, on pose une présence simple : claire, mobile, prête à recevoir un appel ou une demande.
         </p>
         <div class="actions">
           <a class="btn btn-main" href="#demarrer">Diagnostic gratuit</a>
-          <a class="btn btn-soft" href="#offre">C’est quoi le pack</a>
+          <a class="btn btn-ghost" href="#offre">Voir le pack</a>
         </div>
-        <p class="form-note">Pas de promesse de première place Google. Pas de « leads garantis ». Juste un truc qui marche sur téléphone.</p>
+        <p class="fine">Pas de promesse de première place Google. Pas de leads garantis. Un livrable net, un prix net.</p>
       </div>
 
-      <aside class="aside-card" id="offre">
-        <h2>Machine à Demandes Locales</h2>
-        <div class="price">490 € <span>TTC</span></div>
-        <p>245 € pour démarrer · 245 € à la livraison</p>
-        <ul>
-          <li>Mini-site mobile, 1 métier, 1 zone</li>
-          <li>Texte d’offre recentré sur ce que les gens cherchent</li>
-          <li>Formulaire / prise de demande</li>
-          <li>Préparation ou coup de propre sur Google Business</li>
-          <li>1 mois de petits réglages après livraison</li>
-        </ul>
-      </aside>
+      <div class="stage" aria-hidden="true">
+        <div class="stage-glow"></div>
+        <div class="float-card float-a">
+          <div class="label">Sur téléphone</div>
+          <strong>5 secondes pour comprendre</strong>
+          <p>Métier, zone, bouton. Rien d’autre qui noie le message.</p>
+        </div>
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="mock">
+              <div class="mock-top">
+                <div class="mock-badge">L’Isle-Adam · Val-d’Oise</div>
+                <h3>Atelier <i>Martin</i></h3>
+                <p>Plomberie & dépannage. Intervention sous 24h dans un rayon de 20 km.</p>
+                <div class="mock-cta">Demander un devis</div>
+              </div>
+              <div class="mock-body">
+                <div class="mock-row">
+                  <b>Dépannage urgent</b>
+                  <span>Fuite, chauffe-eau, WC bouché</span>
+                </div>
+                <div class="mock-row">
+                  <b>Rénovation salle de bain</b>
+                  <span>Devis clair, chantier propre</span>
+                </div>
+                <div class="mock-row">
+                  <b>Zone</b>
+                  <span>L’Isle-Adam et alentours</span>
+                </div>
+              </div>
+              <div class="mock-bar">
+                <div>Appeler</div>
+                <div>Message</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="float-card float-b">
+          <div class="label">Pack</div>
+          <strong>490 € TTC</strong>
+          <p>245 € à la commande · 245 € à la livraison</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="marquee-wrap" aria-hidden="true">
+      <div class="marquee">
+        <span>Artisan</span><span>·</span><span><em>Indépendant</em></span><span>·</span>
+        <span>Prestataire local</span><span>·</span><span><em>Cabinet</em></span><span>·</span>
+        <span>Coiffeuse à domicile</span><span>·</span><span><em>Plombier</em></span><span>·</span>
+        <span>Coach</span><span>·</span><span><em>Électricien</em></span><span>·</span>
+        <span>Artisan</span><span>·</span><span><em>Indépendant</em></span><span>·</span>
+        <span>Prestataire local</span><span>·</span><span><em>Cabinet</em></span><span>·</span>
+        <span>Coiffeuse à domicile</span><span>·</span><span><em>Plombier</em></span><span>·</span>
+        <span>Coach</span><span>·</span><span><em>Électricien</em></span><span>·</span>
+      </div>
+    </div>
+
+    <section id="offre">
+      <div class="sec-head reveal">
+        <h2>Le pack, sans blabla.</h2>
+        <p>Une offre fermée. Si ça sort du cadre, on chiffre à part.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card feature reveal">
+          <div class="n">Tarif beta</div>
+          <div class="price-xl">490 € <small>TTC</small></div>
+          <p>245 € pour ouvrir le créneau · 245 € quand c’est en ligne</p>
+          <ul>
+            <li>Mini-site mobile · 1 métier · 1 zone</li>
+            <li>Texte d’offre recentré sur ce que les gens cherchent</li>
+            <li>Formulaire / prise de demande</li>
+            <li>Google Business : optimisation ou kit prêt à coller</li>
+            <li>Tracking simple des appels / messages</li>
+            <li>1 mois de petits réglages après livraison</li>
+          </ul>
+        </article>
+        <article class="card reveal d1">
+          <div class="n">Pour qui</div>
+          <h3>Les gens vous connaissent déjà.</h3>
+          <p>Bouche-à-oreille OK, présence en ligne molle. Vous perdez des demandes parce qu’on ne comprend pas assez vite ce que vous faites.</p>
+        </article>
+        <article class="card reveal d2">
+          <div class="n">Hors scope</div>
+          <h3>Ce qu’on ne vend pas ici.</h3>
+          <p>Boutique en ligne, pub Google/Meta, app, multi-pages complexes, shooting, multi-langues. On reste sur un livrable qu’on contrôle en 7 jours.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="strip">
-      <div class="panel">
-        <h3>Pour qui</h3>
-        <p>Artisan, indépendant, prestataire local. Les gens vous trouvent déjà par le bouche-à-oreille, mais votre page (ou votre absence de page) ne convertit rien.</p>
-        <ul>
-          <li>Site flou, trop vieux, ou inexistant</li>
-          <li>Fiche Google à moitié vide</li>
-          <li>On ne comprend pas en 5 secondes ce que vous faites</li>
-        </ul>
+    <section>
+      <div class="sec-head reveal">
+        <h2>Quatre temps. Une semaine.</h2>
+        <p>Le chrono part à réception de l’acompte.</p>
       </div>
-      <div class="panel out">
-        <h3>Ce que ce n’est pas</h3>
-        <ul>
-          <li>Boutique en ligne / app / tunnel marketing de 12 pages</li>
-          <li>Campagnes Google Ads ou Meta</li>
-          <li>Shooting photo, multi-langues, refonte de marque complète</li>
-          <li>Hors cadre = on chiffre à part, on n’improvise pas</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="story">
-      <div class="sticky-note">
-        <div class="tag">Démo illustrative · non client</div>
-        <h3>Avant : « Bienvenue sur mon site » et un numéro noyé.</h3>
-        <p>Après : qui vous êtes, où vous intervenez, un bouton pour demander un devis. Rien de plus. Les vrais cas clients ne sortent qu’avec accord écrit.</p>
-      </div>
-      <div class="panel">
-        <h3>Comment ça se passe vraiment</h3>
-        <p>Pas de kickoff de 2 heures. Vous envoyez métier, zone, service principal, et le lien actuel s’il existe. On construit. Vous validez un lot de retours. On met en ligne.</p>
-        <p style="margin-top:.8rem">Si vous venez d’AlloVoisins ou d’une autre plateforme, on peut enchaîner là où la conversation a commencé. Sinon, le formulaire en bas suffit.</p>
-      </div>
-    </section>
-
-    <section class="how">
-      <h2>Quatre étapes, une semaine</h2>
-      <p>Le délai part une fois l’acompte reçu. On ne gonfle pas le planning avec des réunions inutiles.</p>
-      <div class="steps">
-        <article class="step">
-          <b>1</b>
+      <div class="timeline reveal">
+        <div class="t-step">
+          <div class="t-dot"></div>
           <h3>Brief</h3>
-          <p>Métier, zone, ce que les clients doivent faire sur la page.</p>
-        </article>
-        <article class="step">
-          <b>2</b>
+          <p>Métier, zone, action attendue sur la page.</p>
+        </div>
+        <div class="t-step">
+          <div class="t-dot"></div>
           <h3>Acompte</h3>
-          <p>245 €. Le créneau de prod s’ouvre.</p>
-        </article>
-        <article class="step">
-          <b>3</b>
+          <p>245 €. La prod s’ouvre.</p>
+        </div>
+        <div class="t-step">
+          <div class="t-dot"></div>
           <h3>Build</h3>
           <p>Page, textes, contact, Google préparé.</p>
-        </article>
-        <article class="step">
-          <b>4</b>
+        </div>
+        <div class="t-step">
+          <div class="t-dot"></div>
           <h3>Livré</h3>
-          <p>Un tour de retours, solde, un mois de polish léger.</p>
-        </article>
+          <p>Un lot de retours, solde, polish 30 jours.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head reveal">
+        <h2>Avant / après, sans tricher.</h2>
+        <p>Les vrais portfolios sortent seulement avec accord écrit du client.</p>
+      </div>
+      <div class="demo">
+        <div class="note reveal">
+          <div class="tag">Démo illustrative · non client</div>
+          <h3>On ne vend pas un template. On vend le fait d’être compris tout de suite.</h3>
+          <p>Le téléphone mockup ci-dessus montre le niveau de clarté visé. Pas de faux témoignages, pas de captures inventées.</p>
+        </div>
+        <div class="compare reveal d1">
+          <div class="cmp before">
+            <div class="lbl">Avant</div>
+            <h4>« Bienvenue sur mon site »</h4>
+            <p>Numéro noyé, pas de zone, pas d’action claire. Sur mobile, on abandonne.</p>
+          </div>
+          <div class="cmp after">
+            <div class="lbl">Après</div>
+            <h4>Métier · zone · bouton</h4>
+            <p>En un coup d’œil : ce que vous faites, où, et comment vous joindre.</p>
+          </div>
+        </div>
       </div>
     </section>
 
     <section class="start" id="demarrer">
-      <div class="pay">
+      <div class="pay reveal">
         <h3>Acompte 245 €</h3>
-        <p>Quand le cadre est clair, virement ou paiement via la plateforme d’origine de la demande (ex. AlloVoisins).</p>
+        <p>Quand le cadre est clair : virement, ou paiement via la plateforme d’origine (ex. AlloVoisins).</p>
         <p>Bénéficiaire : Quentin Theo Convert</p>
         <code>FR76 3123 3123 4500 5132 5261 178</code>
-        <p>Libellé :</p>
+        <p>Libellé</p>
         <code>MDL-ACOMPTE Prénom Métier</code>
-        <p style="margin-top:1rem;margin-bottom:0">Ou mail direct : <a href="mailto:notitiacorp@gmail.com?subject=Machine%20a%20Demandes%20Locales" style="color:#ffd7c4">notitiacorp@gmail.com</a></p>
+        <p style="margin-bottom:0">Mail : <a href="mailto:notitiacorp@gmail.com?subject=Machine%20a%20Demandes%20Locales">notitiacorp@gmail.com</a></p>
       </div>
 
-      <form id="lead-form">
-        <h3 style="font-family:Fraunces,Georgia,serif;font-size:1.35rem;margin-bottom:.2rem">Diagnostic gratuit</h3>
-        <p class="form-note">Trois points concrets sur votre visibilité actuelle. Ensuite, si ça colle, on parle du pack.</p>
-        <label>Métier
-          <input id="metier" name="metier" required placeholder="Plombier, coiffeuse à domicile…">
-        </label>
-        <label>Zone
-          <input id="zone" name="zone" required placeholder="Torcy, Seine-et-Marne…">
-        </label>
+      <form id="lead-form" class="reveal d1">
+        <h3>Diagnostic gratuit</h3>
+        <p class="form-note">Trois points concrets sur votre visibilité actuelle. Ensuite, si le cadre colle, on parle du pack.</p>
+        <div class="row-2">
+          <label>Métier
+            <input id="metier" name="metier" required placeholder="Plombier, coach…">
+          </label>
+          <label>Zone
+            <input id="zone" name="zone" required placeholder="Torcy, 77…">
+          </label>
+        </div>
         <label>Service principal
           <input id="service" name="service" required placeholder="Ce que les gens doivent vous demander">
         </label>
-        <label>Téléphone
-          <input id="telephone" name="telephone" required inputmode="tel" placeholder="06…">
-        </label>
-        <label>Lien actuel (site ou Google)
-          <input id="lien" name="lien" placeholder="https://…">
-        </label>
+        <div class="row-2">
+          <label>Téléphone
+            <input id="telephone" name="telephone" required inputmode="tel" placeholder="06…">
+          </label>
+          <label>Lien actuel
+            <input id="lien" name="lien" placeholder="Site ou fiche Google">
+          </label>
+        </div>
         <label>En deux phrases
           <textarea id="message" name="message" placeholder="Ce qui coince aujourd’hui"></textarea>
         </label>
@@ -510,6 +1030,44 @@
   </div>
 
   <script>
+    // reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // gentle parallax on phone stage
+    const stage = document.querySelector('.stage');
+    const phone = document.querySelector('.phone');
+    if (stage && phone && window.matchMedia('(pointer:fine)').matches) {
+      stage.addEventListener('mousemove', (e) => {
+        const r = stage.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        phone.style.transform = `perspective(1000px) rotateY(${-14 + x * 10}deg) rotateX(${6 - y * 8}deg) rotateZ(2deg)`;
+      });
+      stage.addEventListener('mouseleave', () => {
+        phone.style.transform = '';
+      });
+    }
+
+    // magnetic primary buttons
+    document.querySelectorAll('.btn-main').forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - (r.left + r.width / 2);
+        const y = e.clientY - (r.top + r.height / 2);
+        btn.style.transform = `translate(${x * 0.12}px, ${y * 0.18}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+
+    // form -> mailto prerfill
     const form = document.getElementById('lead-form');
     const status = document.getElementById('form-status');
     form.addEventListener('submit', (ev) => {
